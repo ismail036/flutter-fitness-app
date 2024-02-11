@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:vertical_percent_indicator/vertical_percent_indicator.dart';
 
+import 'FullbodyWorkout.dart';
 import 'Notification.dart';
 import 'activity.dart';
 
@@ -447,7 +448,12 @@ class _ActivityState extends State<Activity> {
                       Text("11 Exercies | 32mins"),
                       SizedBox(height: 10,),
                       TextButton(
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => FullbodyWorkout()), // Yönlendirme burada yapılıyor
+                            );
+                          },
                           child: Container(
                             padding: EdgeInsets.all(14.0),
                             width: 120,
@@ -460,7 +466,6 @@ class _ActivityState extends State<Activity> {
                               style: TextStyle(
                                   backgroundColor: Colors.white,
                               ),
-        
                             ),
                           ),
                       ),
