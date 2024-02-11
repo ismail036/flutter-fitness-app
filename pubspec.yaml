@@ -50,6 +50,7 @@ dev_dependencies:
   percent_indicator: ^4.2.3
   vertical_percent_indicator:
   flutter_svg: ^2.0.9
+  numberpicker: ^2.1.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

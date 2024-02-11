@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:vertical_percent_indicator/vertical_percent_indicator.dart';
 
+import 'Notification.dart';
 import 'activity.dart';
 
 class Home extends StatelessWidget {
@@ -40,7 +41,10 @@ class Home extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.notifications), // Bildirim ikonu
                 onPressed: () {
-                  // Bildirim butonuna basıldığında yapılacak işlemler
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NotificationPage()), // Yönlendirme burada yapılıyor
+                  );
                 },
               ),
             ],
