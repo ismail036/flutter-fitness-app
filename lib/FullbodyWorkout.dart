@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'WorkoutSchedule.dart';
+
 
 class FullbodyWorkout extends StatelessWidget {
   const FullbodyWorkout({super.key});
@@ -85,7 +87,10 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                      SizedBox(height: 10,),
                      GestureDetector(
                        onTap: (){
-                         print("Butona tıklandı");
+                         Navigator.push(
+                           context,
+                           MaterialPageRoute(builder: (context) => WorkoutSchedule()), // Yönlendirme burada yapılıyor
+                         );
                        },
                        child: Container(
                        

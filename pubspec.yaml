@@ -51,6 +51,7 @@ dev_dependencies:
   vertical_percent_indicator:
   flutter_svg: ^2.0.9
   numberpicker: ^2.1.2
+  syncfusion_flutter_calendar: ^24.2.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
