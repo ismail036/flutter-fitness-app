@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'ExerciseDetail.dart';
+import 'GetReady.dart';
 import 'WorkoutSchedule.dart';
 
 
@@ -151,26 +153,34 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                      SizedBox(height: 20,),
                      Text("Exercises"),
                      SizedBox(height: 15,),
-                     Container(
-                       height: 60,
-                       child: Row(
-                         children: [
-                           Expanded(child: Row(
-                             children: [
-                               Image.asset("assets/images/jumpingJacks.png"),
-                               Column(
-                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   Text("Jumping jacks"),
-                                   Text("15x"),
-                                 ],
-                               ),
-                             ],
-                            ),
-                           ),
-                           Icon(Icons.navigate_next)
-                         ],
+                     GestureDetector(
+                       onTap: (){
+                         Navigator.push(
+                           context,
+                           MaterialPageRoute(builder: (context) => ExerciseDetail()), // Yönlendirme burada yapılıyor
+                         );
+                       },
+                       child: Container(
+                         height: 60,
+                         child: Row(
+                           children: [
+                             Expanded(child: Row(
+                               children: [
+                                 Image.asset("assets/images/jumpingJacks.png"),
+                                 Column(
+                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                   children: [
+                                     Text("Jumping jacks"),
+                                     Text("15x"),
+                                   ],
+                                 ),
+                               ],
+                              ),
+                             ),
+                             Icon(Icons.navigate_next)
+                           ],
+                         ),
                        ),
                      ),
                      SizedBox(height: 15,),
@@ -265,6 +275,40 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                          ],
                        ),
                      ),
+
+
+                     SizedBox(height: 15,),
+
+                     Container(
+                       width: MediaQuery.of(context).size.width,
+                       padding: EdgeInsets.all(5),
+                       decoration: BoxDecoration(
+                         gradient: LinearGradient(
+                           begin: Alignment.topLeft,
+                           end: Alignment.bottomRight,
+                           colors: [
+                             Color(0xFF1E55A5), // Adjust colors as needed
+                             Color(0xFF14288B),
+                           ],
+                           stops: [0, 1],
+                           transform: GradientRotation(274.42 * 3.141592 / 180),
+                         ),
+                         borderRadius: BorderRadius.circular(45),
+                       ),
+                       child: TextButton(
+                         onPressed: (){
+                           Navigator.push(
+                             context,
+                             MaterialPageRoute(builder: (context) => GetReady()), // Yönlendirme burada yapılıyor
+                           );
+                         },
+                         child: Text("Start Workout",
+                           style: TextStyle(color: Colors.white),
+                         ),
+                       ),
+                     ),
+
+
                    ],
                  ),
                ),
