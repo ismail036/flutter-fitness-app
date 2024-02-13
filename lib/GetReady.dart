@@ -59,7 +59,7 @@ class _ReadyBodyState extends State<ReadyBody> {
                 debugPrint('Countdown Started');
               },
               onComplete: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => Exercise()), // Yönlendirme burada yapılıyor
                 );
@@ -95,7 +95,7 @@ class _ReadyBodyState extends State<ReadyBody> {
             ),
             child: TextButton(
               onPressed: (){
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => Exercise()), // Yönlendirme burada yapılıyor
                 );

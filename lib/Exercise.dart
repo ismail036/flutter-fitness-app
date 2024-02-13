@@ -5,6 +5,13 @@ class Exercise extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Jumping Jacks"),
+          centerTitle: true,
+        ),
+      ),
+    );
   }
 }
