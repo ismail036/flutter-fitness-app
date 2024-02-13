@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
+import 'Exercise.dart';
+
 class GetReady extends StatelessWidget {
   const GetReady ({super.key});
 
@@ -57,7 +59,10 @@ class _ReadyBodyState extends State<ReadyBody> {
                 debugPrint('Countdown Started');
               },
               onComplete: () {
-                debugPrint('Countdown Ended');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Exercise()), // Yönlendirme burada yapılıyor
+                );
               },
               onChange: (String timeStamp) {
                 debugPrint('Countdown Changed $timeStamp');
@@ -89,7 +94,12 @@ class _ReadyBodyState extends State<ReadyBody> {
               borderRadius: BorderRadius.circular(45),
             ),
             child: TextButton(
-              onPressed: (){},
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Exercise()), // Yönlendirme burada yapılıyor
+                );
+              },
               child: Text("Start Workout",
                 style: TextStyle(
                     color: Colors.white,
