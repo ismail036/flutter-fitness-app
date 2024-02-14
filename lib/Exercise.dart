@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pero_fitness/takeRest.dart';
 
 class Exercise extends StatelessWidget {
   const Exercise ({super.key});
@@ -187,7 +188,10 @@ class _ExerciseBodyState extends State<ExerciseBody> {
               ),
               child: TextButton(
                 onPressed: (){
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TakeRest()), // Yönlendirme burada yapılıyor
+                  );
                 },
                 child: Text("Next",
                   style: TextStyle(color: Colors.white),
