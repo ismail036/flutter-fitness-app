@@ -11,7 +11,22 @@ class TakeRest extends StatelessWidget {
           title: Text("Take a rest"),
           centerTitle: true,
         ),
+        body: TakeRestBody(),
       ),
     );
+  }
+}
+
+class TakeRestBody extends StatefulWidget {
+  const TakeRestBody({super.key});
+
+  @override
+  State<TakeRestBody> createState() => _TakeRestBodyState();
+}
+
+class _TakeRestBodyState extends State<TakeRestBody> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
