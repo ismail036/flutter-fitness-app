@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:vertical_percent_indicator/vertical_percent_indicator.dart';
-
+import 'package:intl/intl.dart';
 import 'FullbodyWorkout.dart';
 import 'Notification.dart';
 import 'activity.dart';
@@ -70,9 +73,46 @@ class Activity extends StatefulWidget {
 
 class _ActivityState extends State<Activity> {
 
+  var steps = 0;
+  var calories = 0;
+
+  var data = {};
+
+  Text getHours(var hours){
+    DateTime now = DateTime.now();
+    DateTime hoursAgo1 = now.subtract(Duration(hours: hours));
+    DateTime hoursAgo2 = now.subtract(Duration(hours: hours + 2));
+    String formattedTime = DateFormat('h a').format(hoursAgo1);
+    String formattedTime2 = DateFormat('h a').format(hoursAgo2);
+    if(hours == 0){
+    return Text(formattedTime2 + " - now",
+      style: TextStyle(
+        color: Color(0xFFA5A3B0),
+        fontSize: 12
+        )
+    );
+    }
+    return Text(formattedTime2 + " - " +  formattedTime.toString(),
+        style: TextStyle(
+            color: Color(0xFFA5A3B0),
+            fontSize: 12
+        ),
+    );
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-
+    Future<void> loadJsonAsset() async {
+      final String jsonString = await rootBundle.loadString('assets/data.json');
+      data = jsonDecode(jsonString);
+      setState(() {
+        steps = data["today"][0];
+        calories = data["today"][1];
+      });
+    }
+    loadJsonAsset();
     void handleColumnTap() {
       Navigator.push(
         context,
@@ -315,19 +355,19 @@ class _ActivityState extends State<Activity> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text("6am - 8am"),
+                                          getHours(8),
                                           Text("600 ml"),
                                           SizedBox(height: 10,),
-                                          Text("9am - 11am"),
+                                          getHours(6),
                                           Text("500 ml"),
                                           SizedBox(height: 10,),
-                                          Text("11am - 2pm"),
+                                          getHours(4),
                                           Text("1000 ml"),
                                           SizedBox(height: 10,),
-                                          Text("2pm - 4pm"),
+                                          getHours(2),
                                           Text("700 ml"),
                                           SizedBox(height: 10,),
-                                          Text("2pm - now"),
+                                          getHours(0),
                                           Text("900 ml"),
                                         ],
                                       ),
@@ -360,7 +400,7 @@ class _ActivityState extends State<Activity> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("Foot steps"),
-                            Text("2400"),
+                            Text(steps.toString()),
                             SvgPicture.asset(
                               'assets/images/Sleep-Graph.svg', // Replace 'assets/image.svg' with your SVG file path
                               height: 88, // Adjust height as needed
@@ -384,11 +424,11 @@ class _ActivityState extends State<Activity> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("Calories"),
-                            Text("760 kCal"),
+                            Text(calories.toString()),
                             CircularPercentIndicator(
                               radius: 45.0,
                               lineWidth: 9.0,
-                              percent: 0.6,
+                              percent: calories / 1000,
                               center: Container(
                                 width: 65,
                                 height: 65,
@@ -407,10 +447,11 @@ class _ActivityState extends State<Activity> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    "80%",
+                                    (1000 - calories).toString() + "kCal\n    left",
                                     style: TextStyle(
                                       backgroundColor: Colors.transparent, // Transparent background to see the gradient
-                                      color: Colors.white, // Text color
+                                      color: Colors.white,
+                                      fontSize: 12// Text color
                                     ),
                                   ),
                                 ),

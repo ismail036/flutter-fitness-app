@@ -4,13 +4,19 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'home.dart';
 import 'package:intl/intl.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:intl/intl.dart';
 
 void main() async {
-
   runApp(MyApp());
 }
 
-
+Future<void> loadJsonAsset() async {
+  final String jsonString = await rootBundle.loadString('assets/data.json');
+  final data = jsonDecode(jsonString);
+  print(data);
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
