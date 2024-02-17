@@ -20,19 +20,20 @@ import 'package:hive/hive.dart';
 
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final appDocumentDirectory = await getApplicationDocumentsDirectory();
-  Hive.init(appDocumentDirectory.path);
-  var box = await Hive.openBox('myBox');
-  var person = Person()
-    ..name = 'Dave'
-    ..age = 22;
-  box.add(person);
-  print(box.getAt(0)); // Dave - 22
-  person.age = 30;
-  person.save();
-  print(box.getAt(0)) ;// Dave - 30
   runApp(MyApp());
+  getData();
+
+}
+
+var data = [];
+
+Future<void> getData() async {
+  var db = UserDatabaseProvider();
+  await db.open();
+  await db.addData("kadir", "talas");
+  data = await db.getList();
+  await Future.delayed(Duration(seconds: 1)); // Wait for 1 second
+  print(data);
 }
 
 Future<void> loadJsonAsset() async {
