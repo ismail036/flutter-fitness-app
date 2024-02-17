@@ -1,14 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pero_fitness/person.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
+import 'db_helper.dart';
 import 'home.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:intl/intl.dart';
+import 'dart:convert' as convert;
+import 'dart:io';
+import 'package:sqflite/sqflite.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart';
+import 'package:hive/hive.dart';
+
+
+
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final appDocumentDirectory = await getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDirectory.path);
+  var box = await Hive.openBox('myBox');
+  var person = Person()
+    ..name = 'Dave'
+    ..age = 22;
+  box.add(person);
+  print(box.getAt(0)); // Dave - 22
+  person.age = 30;
+  person.save();
+  print(box.getAt(0)) ;// Dave - 30
   runApp(MyApp());
 }
 

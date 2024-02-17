@@ -53,6 +53,12 @@ dev_dependencies:
   numberpicker: ^2.1.2
   syncfusion_flutter_calendar: ^24.2.4
   circular_countdown_timer: ^0.2.3
+  path_provider:
+  file: ^7.0.0
+  path:
+  shared_preferences: ^2.2.2
+  sqflite: ^2.3.2
+  hive: ^2.2.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -70,6 +76,7 @@ flutter:
      - assets/images/
      - assets/images/object.svg
      - assets/
+     - assets/data.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

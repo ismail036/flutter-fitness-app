@@ -1,8 +1,13 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'ExerciseDetail.dart';
 import 'GetReady.dart';
 import 'WorkoutSchedule.dart';
+import 'package:hive/hive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 
 class FullbodyWorkout extends StatelessWidget {
@@ -40,6 +45,7 @@ class FullbodyWorkout extends StatelessWidget {
 }
 
 
+
 class WorkoutBody extends StatefulWidget {
   const WorkoutBody({super.key});
 
@@ -48,8 +54,25 @@ class WorkoutBody extends StatefulWidget {
 }
 
 class _WorkoutBodyState extends State<WorkoutBody> {
+
+
+  var data = {};
+  var workout = [];
+  var today = [];
+
+
+  Future<void> openBoxes() async {
+    await openBoxes();
+    await Hive.openBox('workoutBox'); // Open a box with the name 'workoutBox'
+  }
+
+
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {// Initialize Hive
+    openBoxes();
+
+
     return Container(
          child: Stack(
            children: [

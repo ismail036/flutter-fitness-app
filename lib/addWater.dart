@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class AddWater extends StatelessWidget {
@@ -31,8 +32,34 @@ class AddWaterBody extends StatefulWidget {
 }
 
 class _AddWaterBodyState extends State<AddWaterBody> {
+  int value = 0;
+  int _currentValue = 0;
+  int water = 0;
+  bool set = false;
 
-  int _currentValue = 3;
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+
+  void getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      value = prefs.getInt('water') ?? 0;
+      _currentValue = prefs.getInt('water') ?? 0;
+    });
+  }
+
+
+  Future<void> setData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setInt("water", value);
+    }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +92,7 @@ class _AddWaterBodyState extends State<AddWaterBody> {
                           ],
                         ),
                       ),
-                      Text("0,5L"),
+                      Text(value.toString()),
                     ],
                   ),
                 ),
@@ -111,7 +138,13 @@ class _AddWaterBodyState extends State<AddWaterBody> {
                 borderRadius: BorderRadius.circular(35),
             ),
             child: TextButton(
-                onPressed: (){},
+                onPressed: (){
+                  setState(() {
+                    value += _currentValue;
+                  });
+                  print(value);
+                  setData();
+                },
                child: Text(
                    "Add",
                  style: TextStyle(
@@ -122,7 +155,6 @@ class _AddWaterBodyState extends State<AddWaterBody> {
           ),
         ],
       )
-
     );
   }
 }

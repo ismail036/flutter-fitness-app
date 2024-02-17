@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,6 +8,8 @@ import 'package:intl/intl.dart';
 import 'FullbodyWorkout.dart';
 import 'Notification.dart';
 import 'activity.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -78,6 +79,8 @@ class _ActivityState extends State<Activity> {
 
   var data = {};
 
+  var today = [];
+
   Text getHours(var hours){
     DateTime now = DateTime.now();
     DateTime hoursAgo1 = now.subtract(Duration(hours: hours));
@@ -100,18 +103,31 @@ class _ActivityState extends State<Activity> {
     );
   }
 
+  Future<void> loadJsonAsset() async {
+    final String jsonString = await rootBundle.loadString('assets/data.json');
+    data = jsonDecode(jsonString);
+    today = data["today"];
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool containsWaterKey = prefs.containsKey("water");
+    print('Water key exists: $containsWaterKey');
+    if(containsWaterKey == false){
+      prefs.setInt("water", 0);
+    }
+  }
+
+  static int _currentWaterValue = 0;
+  int water = 0;
+
+  void getData(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _currentWaterValue = prefs.getInt('water') ?? 0;
+  }
+
 
 
   @override
   Widget build(BuildContext context) {
-    Future<void> loadJsonAsset() async {
-      final String jsonString = await rootBundle.loadString('assets/data.json');
-      data = jsonDecode(jsonString);
-      setState(() {
-        steps = data["today"][0];
-        calories = data["today"][1];
-      });
-    }
+    getData("water");
     loadJsonAsset();
     void handleColumnTap() {
       Navigator.push(
