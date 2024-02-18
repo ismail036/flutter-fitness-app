@@ -93,9 +93,9 @@
       }
     }},
     "lowebody": {
-        "Sit-ups": {
-          "img" : "assets/images/sitUps.png",
-          "mainImg": "assets/images/main/sitUpMain.png",
+        "Bottom to heels stretch": {
+          "img" : "assets/images/bottoomStretch.png",
+          "mainImg": "assets/images/main/bottomHeelsMain.png",
           "times" : 20,
           "calories" : "Easy | 390 Calories Burn",
           "step" : [
@@ -175,10 +175,10 @@
         "times" : 20,
         "calories" : "Easy | 390 Calories Burn",
         "step" : [
-          ["Make sure you warm up first.","For an ab workout, incorporate dynamic stretching into your warm-up that will target your abdominal muscles and get them ready for more intense work."],
-          ["Lower your arms to your sides.","And place your hands, palm-down, under your rear end for cushioning and greater stability."],
-          ["Lift your legs.","So they're hovering just a few inches off the ground, and lift your shoulders and upper torso off the ground to engage your upper abdominals. Make sure you're not crunching your neck — keep it long and soft, an extension of your spine. Try fixing your eyes on the spot where the wall and ceiling meet; this can help you position your head correctly."],
-          ["Kick your legs up and down.","Keeping them straight and the movement even. As you kick, slowly move your legs up higher off the ground. If it helps, you can imagine that you're walking up a wall or an incline."]
+          ["Start by lying on your back with your knees bent.","Sit ups work best if you do them on a soft surface, such as a mattress. Keep your knees bent at a 90-degree angle, with your feet flat on the floor."],
+          ["Put your fingertips on the back of your ears.","Your elbows should be bent and pointing out at your sides. Cupping the back of your ears with your fingertips — as opposed to placing them on the back of your head — can help prevent you from pulling yourself up by your neck as you’re doing sit ups."],
+          ["Lift your torso up as close to your thighs as possible.","Do this with a smooth, steady motion, keeping your feet flat on the floor. When you’re done lifting your torso, your lower back should be off the floor."],
+          ["Lower your torso down to the floor so you’re back in the starting position.","Like you did when you lifted your torso up to your thighs, use a smooth and steady motion as you lower it down."]
         ]
       },
       "Leg raises": {
@@ -203,6 +203,18 @@
           ["Lift your legs up and away from your body.","Once your knees are bent, lift your feet up so your legs are extended and slightly bent at the knee. Avoid straightening your legs so much that your hamstrings feel tight."],
           ["Bring your right knee to your chest and touch your left elbow to it.","Twist your torso as you draw in your knee. At the same time, rotate your left elbow to touch your right knee."],
           ["Alternate the crunch by touching the other knee with the opposite elbow.","Release the crunch and bring your other knee in towards your chest as you touch the opposite elbow to it. Extend the leg that's not tucked in so it's pushed away from your body as though you're pedaling a bike."]
+        ]
+      },
+      "Knee crunches": {
+        "img" : "assets/images/kneeCrunches.png",
+        "mainImg": "assets/images/main/kneeCruchesMain.png",
+        "times" : 20,
+        "calories" : "Easy | 390 Calories Burn",
+        "step" : [
+          ["Lie with your back flat on the ground and your legs raised.","For the sake of comfort, lie on a carpeted section of floor or on a yoga mat. Bend your legs and draw up your knees until they’re directly over your pelvis. Bend your knees at a 90-degree angle so that your feet are sticking straight out."],
+          ["Hold your hands behind your head and look toward your stomach.","To get your torso into position for elbow-to-knee crunches, stretch your arms up behind you. Then, bend your elbows and hold both hands behind your head. Bend your neck so that you are looking down your body towards your belly button."],
+          ["Contract your abs and bring your knees up to your elbows.","Keep your chin down and tense your abdominal muscles. Keep your abs activated the whole time while you're doing the exercise. To do a crunch, keep your elbows in place and lift your knees upward until your elbows and knees touch. You should feel a slight burn in your lower abs as you touch your elbows and knees together."],
+          ["Lower your body back to its starting position.","After you’ve completed 1 crunch, slowly relax your abdominal muscles and lower your head back down to the ground. Also lower your knees until they’re again directly above your pelvis."]
         ]
       },
       "Leg pull-ins": {

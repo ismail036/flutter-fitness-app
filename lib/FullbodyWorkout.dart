@@ -9,6 +9,8 @@ import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
+import 'db_helper.dart';
+
 
 class FullbodyWorkout extends StatelessWidget {
   const FullbodyWorkout({super.key});
@@ -55,23 +57,38 @@ class WorkoutBody extends StatefulWidget {
 
 class _WorkoutBodyState extends State<WorkoutBody> {
 
-
-  var data = {};
   var workout = [];
   var today = [];
 
 
-  Future<void> openBoxes() async {
-    await openBoxes();
-    await Hive.openBox('workoutBox'); // Open a box with the name 'workoutBox'
+  var data = [];
+
+  Future<void> getData() async {
+    var db = UserDatabaseProvider();
+    await db.open();
+    data = await db.getList();
+    setState(() {
+
+    });
   }
+
+
+  List<Widget> exercisesList = [];
+
+
+
+
+
+
+
+
 
 
 
   @override
   Widget build(BuildContext context) {// Initialize Hive
-    openBoxes();
 
+    getData();
 
     return Container(
          child: Stack(
@@ -176,132 +193,35 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                      SizedBox(height: 20,),
                      Text("Exercises"),
                      SizedBox(height: 15,),
-                     GestureDetector(
-                       onTap: (){
-                         Navigator.push(
-                           context,
-                           MaterialPageRoute(builder: (context) => ExerciseDetail()), // Yönlendirme burada yapılıyor
-                         );
-                       },
-                       child: Container(
-                         height: 60,
-                         child: Row(
-                           children: [
-                             Expanded(child: Row(
-                               children: [
-                                 Image.asset("assets/images/jumpingJacks.png"),
-                                 Column(
-                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                   children: [
-                                     Text("Jumping jacks"),
-                                     Text("15x"),
-                                   ],
-                                 ),
-                               ],
-                              ),
-                             ),
-                             Icon(Icons.navigate_next)
-                           ],
+                     for (int i = 0; i < data.length; i++)
+                       if(data[i]["type"] == "fullbody")
+                         Container(
+                           height: 60,
+                           margin: EdgeInsets.symmetric(vertical: 5),
+                           child: Row(
+                             children: [
+                               Expanded(child: Row(
+                                 children: [
+                                   Image.asset(data[i]["img_path"]),
+                                   SizedBox(width: 10,),
+                                   Column(
+                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                     crossAxisAlignment: CrossAxisAlignment.start,
+                                     children: [
+                                       Text(data[i]["name"]),
+                                       Text(data[i]["repetitions"].toString()+"x"),
+                                     ],
+                                   ),
+                                 ],
+                               ),
+                               ),
+                               Icon(Icons.navigate_next)
+                             ],
+                           ),
                          ),
-                       ),
-                     ),
-                     SizedBox(height: 15,),
-                     Container(
-                       height: 60,
-                       child: Row(
-                         children: [
-                           Expanded(child: Row(
-                             children: [
-                               Image.asset("assets/images/jumpingJacks.png"),
-                               Column(
-                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   Text("Jumping jacks"),
-                                   Text("15x"),
-                                 ],
-                               ),
-                             ],
-                           ),
-                           ),
-                           Icon(Icons.navigate_next)
-                         ],
-                       ),
-                     ),
-                     SizedBox(height: 15,),
-                     Container(
-                       height: 60,
-                       child: Row(
-                         children: [
-                           Expanded(child: Row(
-                             children: [
-                               Image.asset("assets/images/jumpingJacks.png"),
-                               Column(
-                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   Text("Jumping jacks"),
-                                   Text("15x"),
-                                 ],
-                               ),
-                             ],
-                           ),
-                           ),
-                           Icon(Icons.navigate_next)
-                         ],
-                       ),
-                     ),
-                     SizedBox(height: 15,),
-                     Container(
-                       height: 60,
-                       child: Row(
-                         children: [
-                           Expanded(child: Row(
-                             children: [
-                               Image.asset("assets/images/jumpingJacks.png"),
-                               Column(
-                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   Text("Jumping jacks"),
-                                   Text("15x"),
-                                 ],
-                               ),
-                             ],
-                           ),
-                           ),
-                           Icon(Icons.navigate_next)
-                         ],
-                       ),
-                     ),
-                     SizedBox(height: 15,),
-                     Container(
-                       height: 60,
-                       child: Row(
-                         children: [
-                           Expanded(child: Row(
-                             children: [
-                               Image.asset("assets/images/jumpingJacks.png"),
-                               Column(
-                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   Text("Jumping jacks"),
-                                   Text("15x"),
-                                 ],
-                               ),
-                             ],
-                           ),
-                           ),
-                           Icon(Icons.navigate_next)
-                         ],
-                       ),
-                     ),
 
 
                      SizedBox(height: 15,),
-
                      Container(
                        width: MediaQuery.of(context).size.width,
                        padding: EdgeInsets.all(5),

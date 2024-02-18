@@ -64,7 +64,10 @@ class UserDatabaseProvider {
       throw Exception("Database is not open!");
     }
 
-    await database.delete('workout');
+    await database.execute(
+      '''
+      '''
+    );
   }
 
 

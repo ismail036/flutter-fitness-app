@@ -21,22 +21,9 @@ import 'package:hive/hive.dart';
 
 void main() async {
   runApp(MyApp());
-  getData();
-
 }
 
-var data;
 
-Future<void> getData() async {
-  var db = UserDatabaseProvider();
-  await db.open();
-
-
-
-
-
-
-}
 
 Future<void> loadJsonAsset() async {
   final String jsonString = await rootBundle.loadString('assets/data.json');
