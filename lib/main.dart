@@ -25,15 +25,17 @@ void main() async {
 
 }
 
-var data = [];
+var data;
 
 Future<void> getData() async {
   var db = UserDatabaseProvider();
   await db.open();
-  await db.addData("kadir", "talas");
-  data = await db.getList();
-  await Future.delayed(Duration(seconds: 1)); // Wait for 1 second
-  print(data);
+
+
+
+
+
+
 }
 
 Future<void> loadJsonAsset() async {

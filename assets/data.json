@@ -5,7 +5,8 @@
   "workout": {"fullbody": {
       "Jumping jacks" : {
         "img" : "assets/images/jumpingJack.png",
-          "times" : 20,
+        "mainImg": "assets/images/main/jumpingJackMain.png",
+        "times" : 20,
         "calories" : "Easy | 390 Calories Burn",
         "step" : [
           ["Stand up straight, arms at your sides, feet shoulder-width apart." , "Pull your shoulders back and lower them along your spine. Maintain the natural curve of the neck, relaxing the jaw as well."],
@@ -16,6 +17,7 @@
       },
       "Tricep dips": {
         "img" : "assets/images/tricepDips.png",
+        "mainImg": "assets/images/main/tricepDipsMain.png",
         "times" : 20,
         "calories" : "Medium | 320 Calories Burn",
         "step": [
@@ -27,6 +29,7 @@
       },
       "Squats": {
         "img" : "assets/images/squats.png",
+        "mainImg": "assets/images/main/squatsMain.png",
         "times": 20,
         "calories" : "Easy | 115 Calories Burn",
         "step" : [
@@ -38,6 +41,7 @@
       },
       "Mountain climbers": {
         "img" : "assets/images/mountainClimbers.png",
+        "mainImg": "assets/images/main/mountainClimbersMain.png",
         "times": 20,
         "calories": "Easy | 115 Calories Burn",
         "step": [
@@ -49,6 +53,7 @@
       },
       "Modified v-sits": {
         "img" : "assets/images/modifiedSits.png",
+        "mainImg": "assets/images/main/modifiedMain.png",
         "times": 20,
         "calories": "Easy | 115 Calories Burn",
         "step": [
@@ -60,6 +65,7 @@
       },
       "Push ups with rotation": {
         "img" : "assets/images/pushUps.png",
+        "mainImg": "assets/images/main/pushRotationMain.png",
         "times": 20,
         "calories": "Easy | 115 Calories Burn",
         "step": [
@@ -72,6 +78,7 @@
       },
       "Up & down planks": {
         "img" : "assets/images/upDown.png",
+        "mainImg": "assets/images/main/upPlanksMain.png",
         "times": 20,
         "calories": "Easy | 115 Calories Burn",
         "step": [
@@ -87,6 +94,8 @@
     }},
     "lowebody": {
         "Sit-ups": {
+          "img" : "assets/images/sitUps.png",
+          "mainImg": "assets/images/main/sitUpMain.png",
           "times" : 20,
           "calories" : "Easy | 390 Calories Burn",
           "step" : [
@@ -97,6 +106,8 @@
           ]
         },
       "Opposite arm / leg raises": {
+        "img" : "assets/images/legRaises.png",
+        "mainImg": "assets/images/main/legRaisesMain.png",
         "times" : 20,
         "calories" : "Easy | 390 Calories Burn",
         "step" : [
@@ -107,6 +118,8 @@
         ]
       },
       "Back extensions": {
+        "img" : "assets/images/backExtensions.png",
+        "mainImg": "assets/images/main/backExtensionMain.png",
         "times" : 20,
         "calories" : "Easy | 390 Calories Burn",
         "step" : [
@@ -117,6 +130,8 @@
         ]
       },
       "Bridges": {
+        "img" : "assets/images/bridges.png",
+        "mainImg": "aassets/images/main/bridgesMain.png",
         "times" : 20,
         "calories" : "Easy | 390 Calories Burn",
         "step" : [
@@ -128,6 +143,8 @@
         ]
       },
      "Knee rolls": {
+       "img" : "assets/images/kneeRolls.png",
+       "mainImg": "assets/images/main/kneeRollsMain.png",
        "times" : 20,
        "calories" : "Easy | 390 Calories Burn",
        "step" : [
@@ -141,6 +158,8 @@
       },
     "ab": {
       "Sit-ups": {
+        "img" : "assets/images/sitUps.png",
+        "mainImg": "assets/images/main/sitUpMain.png",
         "times" : 20,
         "calories" : "Easy | 390 Calories Burn",
         "step" : [
@@ -151,6 +170,8 @@
         ]
       },
       "Flutter kicks": {
+        "img" : "assets/images/flutterKicks.png",
+        "mainImg": "assets/images/main/flutterKicksMain.png",
         "times" : 20,
         "calories" : "Easy | 390 Calories Burn",
         "step" : [
@@ -161,6 +182,8 @@
         ]
       },
       "Leg raises": {
+        "img" : "assets/images/legRaises.png",
+        "mainImg": "assets/images/main/legRaisesMain.png",
         "times" : 20,
         "calories" : "Easy | 390 Calories Burn",
         "step" : [
@@ -170,6 +193,8 @@
         ]
       },
       "Bicycle crunches": {
+        "img" : "assets/images/bicycleCruches.png",
+        "mainImg": "assets/images/main/bicycleCrunchesMain.png",
         "times" : 20,
         "calories" : "Easy | 390 Calories Burn",
         "step" : [
@@ -181,6 +206,8 @@
         ]
       },
       "Leg pull-ins": {
+        "img" : "assets/images/legPull.png",
+        "mainImg": "assets/images/main/legPullMain.png",
         "times" : 20,
         "calories" : "Easy | 390 Calories Burn",
         "step" : [
@@ -191,6 +218,8 @@
         ]
       },
       "Plank arm lifts": {
+        "img" : "assets/images/plankArm.png",
+        "mainImg": "assets/images/main/plankArmMain.png",
         "times" : 20,
         "calories" : "Easy | 390 Calories Burn",
         "step" : [
@@ -203,6 +232,8 @@
         ]
       },
       "Elbow plank": {
+        "img" : "assets/images/elbowPlank.png",
+        "mainImg": "assets/images/main/elbowPlankMain.png",
         "times" : 20,
         "calories" : "Easy | 390 Calories Burn",
         "step" : [
@@ -210,6 +241,8 @@
         ]
       },
       "Body saw": {
+        "img" : "assets/images/bodySaw.png",
+        "mainImg": "assets/images/main/bodySawMain.png",
         "times" : 20,
         "calories" : "Easy | 390 Calories Burn",
         "step" : [
@@ -218,4 +251,5 @@
           ["Bring the center of your body forward, shifting your weight from the balls of your feet to your tiptoes. Pull your nose past your hands to complete the first half of the rep. Tighten your abs as you shift yourself forward, and keep your back straight.","Guide the center of your body backward, shifting back to the balls of your feet. Move backward until your forehead is behind your hands. You’ve now completed 1 rep of the body saw exercise!"]
         ]
       }
-    }}
+    }
+}

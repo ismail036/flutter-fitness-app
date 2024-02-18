@@ -4,27 +4,34 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class UserDatabaseProvider {
-  var _userDatabaseName = "kullanicilar";
-  var _userTableName = "user";
+  var _userDatabaseName = "fitnessDatabase";
+  var _userTableName = "workoutsTable";
   var _version = 1;
   late Database database;
 
 
   Future<void> open() async {
-    database = await openDatabase(_userDatabaseName,
-      version: _version,onCreate: (db,version){
-      db.execute('''
-      CREATE TABLE kullanicilar (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    isim TEXT,
-    soyisim TEXT
-);
+    database = await openDatabase(
+      _userDatabaseName,
+      version: _version,
+      onCreate: (db, version) async {
+        await db.execute('''
+        CREATE TABLE $_userTableName (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          type TEXT,
+          name TEXT,
+          img_path TEXT,
+          main_img_path TEXT,
+          repetitions INTEGER,
+          calories INTEGER,
+          description TEXT
+        );
       ''');
-        }
+      },
     );
   }
 
-  Future<void> addData(String name, String surname) async {
+  Future<void> addWorkoutData(String type, String name, String imgPath, String main_img_path ,int repetitions, String calories, String description) async {
     // Ensure that the database is already opened
     if (database == null) {
       throw Exception("Database is not open!");
@@ -33,8 +40,16 @@ class UserDatabaseProvider {
     try {
       // Insert data into the database
       await database.insert(
-        'kullanicilar',
-        {'isim': name, 'soyisim': surname},
+        _userTableName,
+        {
+          'type': type,
+          'name': name,
+          'img_path': imgPath,
+          'main_img_path' : main_img_path,
+          'repetitions': repetitions,
+          'calories': calories,
+          'description': description,
+        },
       );
       print('Data added successfully');
     } catch (e) {
@@ -43,8 +58,22 @@ class UserDatabaseProvider {
     }
   }
 
-  Future<List> getList() async{
-    List<Map> userMaps = await database.query(_userDatabaseName);
+
+  Future<void> clearTable() async {
+    if (database == null) {
+      throw Exception("Database is not open!");
+    }
+
+    await database.delete('workout');
+  }
+
+
+
+
+
+
+  Future<List<Map<String, dynamic>>> getList() async {
+    List<Map<String, dynamic>> userMaps = await database.query(_userTableName);
     return userMaps;
   }
 
