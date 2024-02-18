@@ -73,6 +73,33 @@ class UserDatabaseProvider {
     );
   }
 
+  Future<void> updateImage() async {
+    if (database == null) {
+      throw Exception("Database is not open!");
+    }
+
+    await database.execute(
+        '''
+        UPDATE $_userTableName
+        SET 'main_img_path' = 'assets/images/main/oppositeArmMain.png'
+        WHERE id = 22;
+      '''
+    );
+  }
+
+
+
+  Future<List<Map<String, dynamic>>> getListType(String type) async {
+    List<Map<String, dynamic>> userMaps = await database.query(_userTableName);
+    List<Map<String, dynamic>> filteredList = [];
+    for (var userMap in userMaps) {
+      if (userMap['type'] == type) {
+        filteredList.add(userMap);
+      }
+    }
+    return filteredList;
+  }
+
 
 
 

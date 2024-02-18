@@ -1,15 +1,33 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:pero_fitness/takeRest.dart';
 
+import 'FullbodyWorkout.dart';
+import 'db_helper.dart';
+
+
+var workoutType = "";
+var exerciseStep = 0;
+
+var data = [];
+var exerciseData;
+var _currentValue = 0;
+var exerciseName = "";
+
 class Exercise extends StatelessWidget {
-  const Exercise ({super.key});
+  Exercise ({super.key, required String type, required int step, required String fE}){
+    workoutType = type;
+    exerciseStep = step;
+    exerciseName = fE;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Jumping Jacks"),
+          title: Text(exerciseName),
           centerTitle: true,
         ),
         body: ExerciseBody(),
@@ -27,16 +45,32 @@ class ExerciseBody extends StatefulWidget {
 }
 
 class _ExerciseBodyState extends State<ExerciseBody> {
-  var _currentValue = 20;
+
+
+  Future<void> getData() async {
+    var db = UserDatabaseProvider();
+    await db.open();
+    data = await db.getListType(workoutType);
+    setState(() {
+
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    getData();
+    var desc = data[exerciseStep]["description"].replaceAll(" , " , ",").replaceAll(' "', " '");
+    desc = desc.replaceAll('" ', "' ");
+    desc = desc.replaceAll('\n', "");
+    List<dynamic> jsonList = json.decode(desc);
     return Container(
       margin: EdgeInsets.all(15),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset("assets/images/jumpingJacksDetail.png"),
+            Image.asset(data[exerciseStep]["main_img_path"]),
             SizedBox(height: 25,),
 
 
@@ -70,10 +104,10 @@ class _ExerciseBodyState extends State<ExerciseBody> {
                       borderRadius: BorderRadius.circular(60),
                     ),
                   ),
-                  Text("20x",
+                  Text((data[exerciseStep]['repetitions']).toString() + "x",
                     style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.w900
+                        fontSize: 50,
+                        fontWeight: FontWeight.w900
                     ),
                   )
                 ],
@@ -90,83 +124,41 @@ class _ExerciseBodyState extends State<ExerciseBody> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("How To Do It"),
-                        Text("4 steps")
+                        Text((jsonList.length).toString() + " Steps ")
                       ],
                     )
                   ],
                 )
             ),
             SizedBox(height: 10,),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("O1",style: TextStyle(fontSize: 15, color: Colors.indigoAccent),),
-                  SizedBox(width: 15,),
-                  Flexible(
-                    child: Column(
-                      children: [
-                        Text("Stand up straight, arms at your sides, feet shoulder-width apart.",
-                          style: TextStyle(fontWeight: FontWeight.w600),),
-                        Text("Pull your shoulders back and lower them along your spine. Maintain the natural curve of the neck, relaxing the jaw as well.",
-                          style: TextStyle(color: Colors.grey),)
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-
             SizedBox(height: 10,),
 
-            Container(
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("O2",style: TextStyle(fontSize: 15, color: Colors.indigoAccent),),
-                  SizedBox(width: 15,),
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Jump up and stretch your arms above your head.",style: TextStyle(fontWeight: FontWeight.w600),),
-                        Text("Put your feet shoulder-width apart, bend your knees slightly so that you can jump. When you bounce or bounce just a few inches off the ground, raise your arms above your head until they are about shoulder width apart.",
-                          style: TextStyle(color: Colors.grey),)
-                      ],
-                    ),
-                  )
-                ],
+            for (int i = 0; i < jsonList.length; i++)
+              Container(
+                margin: EdgeInsets.symmetric(vertical:6),
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("0" + (i+1).toString(),style: TextStyle(fontSize: 15, color: Colors.indigoAccent),),
+                    SizedBox(width: 15,),
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(jsonList[i][0],
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(jsonList[i][1],
+                            style: TextStyle(color: Colors.grey),)
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-
-            SizedBox(height: 10,),
-
-            Container(
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("O3",style: TextStyle(fontSize: 15, color: Colors.indigoAccent),),
-                  SizedBox(width: 15,),
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Stretch out your legs.",style: TextStyle(fontWeight: FontWeight.w600),),
-                        Text("During the jump, spread your legs wider than shoulder width and raise your arms above your head. Give way or take away a little space depending on your height and leave a lot of space between your legs.",
-                          style: TextStyle(color: Colors.grey),)
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-
-            SizedBox(height: 15,),
-
-
 
             SizedBox(height: 15,),
 
@@ -188,17 +180,24 @@ class _ExerciseBodyState extends State<ExerciseBody> {
               ),
               child: TextButton(
                 onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TakeRest()), // Yönlendirme burada yapılıyor
-                  );
+                  if(exerciseStep+1 >= data.length){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FullbodyWorkout(type: workoutType)), // Yönlendirme burada yapılıyor
+                    );
+                  }else{
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => TakeRest(nextStep:exerciseStep+1 , type:workoutType)), // Yönlendirme burada yapılıyor
+                    );
+                  }
+
                 },
                 child: Text("Next",
                   style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
-
           ],
         ),
       ),

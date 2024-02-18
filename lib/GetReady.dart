@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
+
 import 'Exercise.dart';
+import 'db_helper.dart';
+var workoutType = "";
 
 class GetReady extends StatelessWidget {
-  const GetReady ({super.key});
+  GetReady ({super.key, required String type}){
+    workoutType = type;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +33,24 @@ class ReadyBody extends StatefulWidget {
 }
 
 class _ReadyBodyState extends State<ReadyBody> {
+
+  var data = [];
+  var firstExerciseName = "";
+  Future<void> getData() async {
+    var db = UserDatabaseProvider();
+    await db.open();
+    data = await db.getListType(workoutType);
+    setState(() {
+
+    });
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
+    getData();
     return Container(
       margin: EdgeInsets.all(16),
       child: Column(
@@ -61,7 +82,7 @@ class _ReadyBodyState extends State<ReadyBody> {
               onComplete: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => Exercise()), // Yönlendirme burada yapılıyor
+                  MaterialPageRoute(builder: (context) => Exercise(type:workoutType,step:0,fE:firstExerciseName)), // Yönlendirme burada yapılıyor
                 );
               },
               onChange: (String timeStamp) {
@@ -97,7 +118,7 @@ class _ReadyBodyState extends State<ReadyBody> {
               onPressed: (){
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => Exercise()), // Yönlendirme burada yapılıyor
+                  MaterialPageRoute(builder: (context) => Exercise(type:workoutType,step:0,fE:firstExerciseName)), // Yönlendirme burada yapılıyor
                 );
               },
               child: Text("Start Workout",

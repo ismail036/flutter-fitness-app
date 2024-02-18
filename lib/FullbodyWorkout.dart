@@ -72,6 +72,7 @@ class _WorkoutBodyState extends State<WorkoutBody> {
     setState(() {
 
     });
+    db.updateImage();
   }
 
 
@@ -241,9 +242,10 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                        ),
                        child: TextButton(
                          onPressed: (){
+
                            Navigator.push(
                              context,
-                             MaterialPageRoute(builder: (context) => GetReady()), // Yönlendirme burada yapılıyor
+                             MaterialPageRoute(builder: (context) => GetReady(type:workoutType)), // Yönlendirme burada yapılıyor
                            );
                          },
                          child: Text("Start Workout",
