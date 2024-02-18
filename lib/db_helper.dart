@@ -59,16 +59,22 @@ class UserDatabaseProvider {
   }
 
 
-  Future<void> clearTable() async {
+  Future<void> updateData(int rep, int id) async {
     if (database == null) {
       throw Exception("Database is not open!");
     }
 
     await database.execute(
       '''
+        UPDATE $_userTableName
+        SET 'repetitions' = $rep
+        WHERE id = $id;
       '''
     );
   }
+
+
+
 
 
 
