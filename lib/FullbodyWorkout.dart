@@ -11,9 +11,12 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 
 import 'db_helper.dart';
 
+var workoutType = "";
 
 class FullbodyWorkout extends StatelessWidget {
-  const FullbodyWorkout({super.key});
+  FullbodyWorkout({super.key, required String type}){
+    workoutType = type;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +62,10 @@ class _WorkoutBodyState extends State<WorkoutBody> {
 
   var workout = [];
   var today = [];
+
+
+
+
 
 
   var data = [];
@@ -194,7 +201,7 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                      Text("Exercises"),
                      SizedBox(height: 15,),
                      for (int i = 0; i < data.length; i++)
-                       if(data[i]["type"] == "fullbody")
+                       if(data[i]["type"] == workoutType)
                          Container(
                            height: 60,
                            margin: EdgeInsets.symmetric(vertical: 5),

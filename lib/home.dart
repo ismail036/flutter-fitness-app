@@ -508,7 +508,7 @@ class _ActivityState extends State<Activity> {
                           onPressed: (){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => FullbodyWorkout()), // Yönlendirme burada yapılıyor
+                              MaterialPageRoute(builder: (context) => FullbodyWorkout(type:"fullbody")), // Yönlendirme burada yapılıyor
                             );
                           },
                           child: Container(
@@ -555,7 +555,12 @@ class _ActivityState extends State<Activity> {
                       Text("12 Exercies | 40mins"),
                       SizedBox(height: 10,),
                       TextButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => FullbodyWorkout(type:"lowebody")), // Yönlendirme burada yapılıyor
+                          );
+                        },
                         child: Container(
                           padding: EdgeInsets.all(14.0),
                           width: 120,
@@ -601,7 +606,12 @@ class _ActivityState extends State<Activity> {
                       Text("14 Exercies | 20mins"),
                       SizedBox(height: 10,),
                       TextButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => FullbodyWorkout(type:"ab")), // Yönlendirme burada yapılıyor
+                          );
+                        },
                         child: Container(
                           padding: EdgeInsets.all(14.0),
                           width: 120,
