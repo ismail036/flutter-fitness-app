@@ -63,11 +63,6 @@ class _WorkoutBodyState extends State<WorkoutBody> {
   var workout = [];
   var today = [];
 
-
-
-
-
-
   var data = [];
 
   Future<void> getData() async {
@@ -81,15 +76,6 @@ class _WorkoutBodyState extends State<WorkoutBody> {
 
 
   List<Widget> exercisesList = [];
-
-
-
-
-
-
-
-
-
 
 
   @override
@@ -202,28 +188,36 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                      SizedBox(height: 15,),
                      for (int i = 0; i < data.length; i++)
                        if(data[i]["type"] == workoutType)
-                         Container(
-                           height: 60,
-                           margin: EdgeInsets.symmetric(vertical: 5),
-                           child: Row(
-                             children: [
-                               Expanded(child: Row(
-                                 children: [
-                                   Image.asset(data[i]["img_path"]),
-                                   SizedBox(width: 10,),
-                                   Column(
-                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                     children: [
-                                       Text(data[i]["name"]),
-                                       Text(data[i]["repetitions"].toString()+"x"),
-                                     ],
-                                   ),
-                                 ],
-                               ),
-                               ),
-                               Icon(Icons.navigate_next)
-                             ],
+                         GestureDetector(
+                           onTap: (){
+                             Navigator.push(
+                               context,
+                               MaterialPageRoute(builder: (context) => ExerciseDetail(name:data[i]["name"])), // Yönlendirme burada yapılıyor
+                             );
+                           },
+                           child: Container(
+                             height: 60,
+                             margin: EdgeInsets.symmetric(vertical: 5),
+                             child: Row(
+                               children: [
+                                 Expanded(child: Row(
+                                   children: [
+                                     Image.asset(data[i]["img_path"]),
+                                     SizedBox(width: 10,),
+                                     Column(
+                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                       crossAxisAlignment: CrossAxisAlignment.start,
+                                       children: [
+                                         Text(data[i]["name"]),
+                                         Text(data[i]["repetitions"].toString()+"x"),
+                                       ],
+                                     ),
+                                   ],
+                                 ),
+                                 ),
+                                 Icon(Icons.navigate_next)
+                               ],
+                             ),
                            ),
                          ),
 
@@ -257,8 +251,6 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                          ),
                        ),
                      ),
-
-
                    ],
                  ),
                ),

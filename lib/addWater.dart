@@ -109,7 +109,7 @@ class _AddWaterBodyState extends State<AddWaterBody> {
                         NumberPicker(
                           value: _currentValue,
                           minValue: 0,
-                          maxValue: 100,
+                          maxValue: 2000,
                           onChanged: (value) => setState(() => _currentValue = value),
                         ),
                         Text('Water'), // Water metnini ekledik
