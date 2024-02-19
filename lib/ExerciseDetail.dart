@@ -72,13 +72,11 @@ class _ExerciseBodyState extends State<ExerciseBody> {
   @override
   Widget build(BuildContext context) {
     getData();
-    print(isDataLoaded);
     var desc = exerciseData["description"].replaceAll(" , " , ",").replaceAll(' "', " '");
     desc = desc.replaceAll('" ', "' ");
     desc = desc.replaceAll('\n', "");
     List<dynamic> jsonList = json.decode(desc);
     _currentValue = exerciseData['repetitions'];
-    print(exerciseData["id"]);
     return Container(
       margin: EdgeInsets.all(15),
       child: SingleChildScrollView(

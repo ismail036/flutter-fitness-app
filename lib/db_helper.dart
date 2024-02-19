@@ -4,18 +4,19 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class UserDatabaseProvider {
-  var _userDatabaseName = "fitnessDatabase";
-  var _userTableName = "workoutsTable";
-  var _version = 1;
+  var _userDatabaseName = "fitnessDb18";
+  var _userTableName = "workoutsTb18";
+  var _version = 2;
   late Database database;
 
 
   Future<void> open() async {
-    database = await openDatabase(
-      _userDatabaseName,
-      version: _version,
-      onCreate: (db, version) async {
-        await db.execute('''
+    try {
+      database = await openDatabase(
+        _userDatabaseName,
+        version: _version,
+        onCreate: (db, version) async {
+          await db.execute('''
         CREATE TABLE $_userTableName (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           type TEXT,
@@ -26,10 +27,183 @@ class UserDatabaseProvider {
           calories INTEGER,
           description TEXT
         );
-      ''');
-      },
-    );
+        ''');
+          await db.execute(
+              '''
+    INSERT INTO $_userTableName (type, name, img_path, main_img_path, repetitions, calories, description) 
+    VALUES 
+    ("fullbody", "Jumping jacks", "assets/images/jumpingJack.png", "assets/images/main/jumpingJackMain.png", 20, "Easy | 390 Calories Burn", 
+    '[
+          ["Stand up straight, arms at your sides, feet shoulder-width apart." , "Pull your shoulders back and lower them along your spine. Maintain the natural curve of the neck, relaxing the jaw as well."],
+          ["Jump up and stretch your arms above your head.","Put your feet shoulder-width apart, bend your knees slightly so that you can jump. When you bounce or bounce just a few inches off the ground, raise your arms above your head until they are about shoulder width apart."],
+          ["Stretch out your legs.","During the jump, spread your legs wider than shoulder width and raise your arms above your head. Give way or take away a little space depending on your height and leave a lot of space between your legs."],
+          ["Land in the starting position.","After jumping into the air, land gently in the first position, arms at your sides, feet shoulder width apart."]
+        ]'
+    ),
+      ("fullbody", "Tricep dips", "assets/images/tricepDips.png", "assets/images/main/tricepDipsMain.png", 20,"Medium | 320 Calories Burn", 
+    '[
+          ["Stand in the starting position with the bench behind you.","You can use any sturdy bench or chair, for example, for training or even a park bench. You can even do it without getting out of bed."],
+          ["Tighten your abs and come off the bench.","Tighten your abs to tighten them. Break away from the front edge of the bench and use your hands to lower yourself to the floor. Don go down completely."],
+          ["Keep your head and upper body straight.","When you descend, make sure that your body remains upright. Look straight ahead to remind yourself not to lower your head while doing bends."],
+          ["Hold in the \"leaning\" position for 1-2 seconds before pulling up again.","When you reach the bottom of the sinkhole, stay there for a couple of seconds. This will make your arm muscles work harder while you hold yourself in place. After you have held the pose, lift your body up again, while maintaining tension in the spine."]
+        ]'
+    ),
+     ("fullbody", "Squats", "assets/images/squats.png", "assets/images/main/squatsMain.png", 20, "Easy | 115 Calories Burn", 
+    '[
+          ["Put your feet on the ground.","Keep your feet slightly wider than shoulder width. Straighten your back. Turn your feet slightly outward in the direction of 10 and 2 oclock, not directly in front of you."],
+          ["Bend your knees.","Imagine that you are going to lean back in your chair. Do not lift your heels off the floor. Tighten your abs. Keep your back straight and in a neutral position throughout the exercise."],
+          ["Descend in a controlled manner.","As you lower yourself, pull your hips back. Bend down as low as possible, keeping your shins upright and touching the floor with your heels. From the lower position, push off from the heels and slowly rise, balancing, leaning forward if necessary."],
+          ["Hold in the leaning position for 1-2 seconds before pulling up again.","When you reach the bottom of the sinkhole, stay there for a couple of seconds. This will make your arm muscles work harder while you hold yourself in place. After you have held the pose, lift your body up again, while maintaining tension in the spine."]
+        ]'
+    ),
+    ("fullbody", "Mountain climbers", "assets/images/mountainClimbers.png", "assets/images/main/mountainClimbersMain.png", 20, "Easy | 115 Calories Burn", 
+    '[
+          ["Take the plank position.","Get down on the floor with support on your hands and knees. Straighten your legs, keeping your balance on your feet and toes. Place your palms directly under your shoulders, fingers pointing forward and slightly turned outward. Engage the muscles of the core, constantly keeping them in tension. The body should be positioned in a straight line, from the back of the head to the heels."],
+          ["Pull one knee up to your chest.","Lift one leg off the floor and start bending, while pulling it up between your torso and the floor. Pull your knee forward in one smooth, controlled motion. At the same time, the knees should not fall or touch the floor. Pulling your knee up as far and high as you can, fix the abdominal muscles in tension for a short time, but with all your strength."],
+          ["Repeat with the second knee.","Relax your stomach and slowly lower your knee back to the second leg. Straighten your leg and put it on the floor. Then, with a smooth movement, pull the second knee forward, while straining the abdominal muscles."],
+          ["Continue to perform the movement alternately with both knees.","Return the leg to the starting position and start bending the other knee again. Repeat the movement until you master it. That`s all! Do the maximum number of repetitions possible for you, until your muscles are tired, and gradually try to increase this number. This exercise will perfectly complement any strength or endurance training."]
+        ]'
+    ),
+     ("fullbody", "Modified v-sits", "assets/images/modifiedSits.png", "assets/images/main/modifiedMain.png", 20, "Easy | 115 Calories Burn", 
+    '[
+          ["Work on the lower abdomen with various exercises.","The rectus abdominis muscle (your \"six-point\" muscle) stretches from the lower part of the chest down to the pelvis."],
+          ["Perform leg lifts.","Start by lying flat on your back. You can use the mat for comfort. Press your palms to your sides, face down.\nLift your feet off the floor so that they point directly at the ceiling. Your body should form the letter \"L\".\nConcentrating on using the muscles of the lower abdomen, gently lift your hips off the floor, keeping your legs straight. Hold for a second, then lower your hips back to the floor. Perform smooth, controlled movements - do not jump or twitch."],
+          ["Perform reverse twists.","Start by lying on your back with your legs raised in the \"tabletop\" position - legs raised, knees bent. In other words, your hips should form a 90-degree angle with the ground, and your shins should form a 90-degree angle with your hips.\nSpread your arms wide so that your palms touch the ground. This will provide a wide base that will help you keep your balance.\nKeeping your upper back still, use your lower abs to lift your hips off the floor. The knees should be pressed against the chest.\nHold this position for a second, then gently lower your hips back to the ground."],
+          ["Perform a V-shaped abdominal hold.","Start by lying flat on your back.\nWith both hands at your sides, gently and gently lift both legs and torso about 45 degrees off the floor. Your body should form the letter \"V\", your hips should touch the floor. Keep your legs straight and maintain a strong, balanced posture.\nTighten your abs and use your arms to keep your balance. Some people find it easier to keep their balance if they stretch their arms parallel to the floor, pointing in the direction of their feet. However, if you do this, do not support your legs with your hands at all.\nHold this position. Hold this position until you feel a burn, usually from 30 seconds to 2 minutes. Repeat if necessary."]
+        ]'
+    ),
+    ("fullbody", "Push ups with rotation", "assets/images/pushUps.png", "assets/images/main/pushRotationMain.png", 20, "Easy | 115 Calories Burn", 
+    '[
+          ["Start in the push-up position","Hands and feet on the ground Hands, elbows and shoulders should be in line."],
+          ["Keep your elbows slightly bent","Start bending at the elbows to lower your body to the ground. It is important that the body remains in a straight line. Do not lower your hips to the floor and do not stretch your neck forward, thinking that you are sinking deeper."],
+          ["At the bottom of the push-ups","Start pushing your palms into the ground to lift your body up and straighten your arms."],
+          ["At the top of the push-ups","Push one palm into the ground and start rotating the other arm while rotating the torso. The body must be in the \"T\" position."],
+          ["Turn around","Put your hand on the ground, then change sides."]
+        ]'
+    ),
+    ("fullbody", "Up & down planks", "assets/images/upDown.png", "assets/images/main/upPlanksMain.png", 20, "Easy | 115 Calories Burn", 
+    '[
+          ["Begin on all fours.","If you are new to yoga or not especially flexible, prepare yourself to perform plank pose by starting on all fours. Make sure that you will be comfortable by using a yoga mat. You may also place a folded up blanket under your knees if you need some extra padding for your knees."],
+          ["Exhale and push back to child’s pose.","To do child’s pose, or balasana, remain on your hands and knees and move your bottom back towards your feet. Allow your thighs to spread out to the same width as your shoulders as you do this and sink your chest towards the mat. Your hand should stay out in front of you with your palms on the yoga mat."],
+          ["Hinge forward to plank pose.","When you are ready, push your body up from childs pose and back onto your hands and knees. Then, move into a plank pose, or kumbhakasana. Position your shoulders over your hands and straighten your legs as you rise up onto the balls of your feet. When you are in position, you should look like you are preparing to do a push up."],
+          ["Drop down to your forearms if desired.","You can stay up on the palms of your hands if you want, or you can drop down onto your forearms to make the plank a little more challenging. This variation is called the dolphin plank pose"],
+          ["Return to childs pose.","After you’ve stayed in plank for three to five breaths, exhale, get onto your hands and knees, and then hinge back to child’s pose. Give your body a chance to rest in child’s pose for a few breaths before you proceed with any further poses."],
+          ["Try advanced plank poses.","Once youve mastered the full plank, you can challenge yourself with more difficult variations. Dont progress to these until you are strong enough to keep your body straight and stable throughout the entire movement."],
+          ["Finish your plank practice.","After you’ve done a few rounds of plank pose, finish your practice. From the plank pose, gently lower your knees to the floor. Then, transition into child’s pose again and breathe. Take three to five breaths in child’s pose to complete your routine."]
+        ]'
+    ),
+    ("lowebody", "Bottom to heels stretch", "assets/images/bottoomStretch.png", "assets/images/main/bottomHeelsMain.png", 20, "Easy | 390 Calories Burn", 
+      '[
+            ["Get on all fours.","With your hands directly under your shoulders and your knees under your hips."],
+            ["Keeping your back and neck straight.","slowly move your bottom back towards your heels, leaving your arms outstretched in front."],
+            ["Stretch out your legs.","During the jump, spread your legs wider than shoulder width and raise your arms above your head. Give way or take away a little space depending on your height and leave a lot of space between your legs."],
+            ["Hold this position.","For 5-10 seconds and return to the starting position.\nRepeat this 8-10 times."]
+          ]'
+    ),
+     ("lowebody", "Opposite arm / leg raises", "assets/images/legRaises.png",  "assets/images/main/legRaisesMain.png", 20, "Easy | 390 Calories Burn", 
+    '[
+          ["Stand on your hands.","And knees, tighten your abdominal muscles, place your arms directly under your shoulders, and take your shoulders off the floor."],
+          ["At the same time.","Raise your left arm straight up in front of you and extend your right leg into the air behind you until they are parallel to the ground."],
+          ["Stretch out your legs.","During the jump, spread your legs wider than shoulder width and raise your arms above your head. Give way or take away a little space depending on your height and leave a lot of space between your legs."],
+          ["Slowly return to the starting position.","Repeat with your right arm and left leg.\nDo the exercise with the required number of repetitions on each side. Try to keep your torso from moving during the exercise. Strain your abdominal muscles to stabilize your spine."]
+        ]'
+    ),
+     ("lowebody", "Back extensions", "assets/images/backExtensions.png",  "assets/images/main/backExtensionMain.png", 20, "Easy | 390 Calories Burn", 
+     '[
+          ["Lie on your stomach.","And straighten your legs."],
+          ["Put your hands behind your head.","To complicate the exercise, you can pull them forward in front of you."],
+          ["Lift your upper body smoothly.","Look forward, and relax your neck."],
+          ["Hold at the highest point","For 10-15 seconds and slowly return to the starting position."]
+        ]'
+    ),
+    ("lowebody", "Bridges", "assets/images/bridges.png",  "assets/images/main/bridgesMain.png" , 20, "Easy | 390 Calories Burn", 
+     '[
+          ["Take the emphasis lying on your back.","It is recommended to use a yoga mat when performing this element, although any carpet will do to protect your back from possible injuries when working on a hard and hard surface. Once you have accepted the emphasis lying on your back, bend your knees and spread your hips apart, firmly resting your feet on the floor. Position your heels of your feet as close to your buttocks as possible, or simply move your buttocks towards your heels. Engage the muscles of your buttocks to push your hips up."],
+          ["The hands should rest peacefully on the sides of the body.","You can move your hands closer to your hips, resting your palms on the floor to help yourself keep your balance in an unusual position for yourself. Lock your shoulder blades together, which will direct your shoulders down to the floor. You can also lean on your hands and help yourself to control the process of doing the exercise."],
+          ["Lift your hips up.","You should tilt your pelvis slightly towards your face. Aim to touch your spine with your navel, which activates the abdominal muscles. Resting your feet on the floor, bring your hips to the highest comfortable position. Imagine that you need to touch the ceiling or the sky with your hips. Slightly tighten your buttocks while performing this movement."],
+          ["Keep your knees and hips in a parallel position to each other.","Do not let them spread apart, which can result in knee or back injury, shoulders should be positioned on the floor to protect your neck."],
+          ["Fix this position for 5 full breaths and exhalations, and then return to the starting position.","Stretch your legs straight and rest a little."]
+        ]'
+    ),
+    ("lowebody", "Knee rolls", "assets/images/kneeRolls.png",  "assets/images/main/kneeRollsMain.png" , 20, "Easy | 390 Calories Burn", 
+     '[
+         ["Lie on your back.","Relax your knees and arms in the rear position (above your head)."],
+         ["Wrap one knee inwards.","(Or let it fall between your feet), then lift the same knee and let it fall again, etc. The stomach should lift the relaxed knee, and gravity should partially perform the fall."],
+         ["Do the exercise.","On one knee 20 to 50 times."],
+         ["Keep your knees and hips in a parallel position to each other.","Do not let them spread apart, which can result in knee or back injury, shoulders should be positioned on the floor to protect your neck."],
+         ["Then lift the used leg.","And feel light and relaxed. This leg will feel much longer than an unused leg."]
+       ]'),
+       
+    ("ab", "Sit-ups", "assets/images/sitUps.png",  "assets/images/main/sitUpMain.png" , 20, "Easy | 390 Calories Burn", 
+     '[
+          ["Start by lying on your back with your knees bent.","Sit ups work best if you do them on a soft surface, such as a mattress. Keep your knees bent at a 90-degree angle, with your feet flat on the floor."],
+          ["Put your fingertips on the back of your ears.","Your elbows should be bent and pointing out at your sides. Cupping the back of your ears with your fingertips — as opposed to placing them on the back of your head — can help prevent you from pulling yourself up by your neck as you’re doing sit ups."],
+          ["Lift your torso up as close to your thighs as possible.","Do this with a smooth, steady motion, keeping your feet flat on the floor. When you’re done lifting your torso, your lower back should be off the floor."],
+          ["Lower your torso down to the floor so you’re back in the starting position.","Like you did when you lifted your torso up to your thighs, use a smooth and steady motion as you lower it down."]
+        ]'),
+       
+    ("ab", "Flutter kicks", "assets/images/flutterKicks.png",  "assets/images/main/flutterKicksMain.png" , 20, "Easy | 390 Calories Burn", 
+     '[
+          ["Start by lying on your back with your knees bent.","Sit ups work best if you do them on a soft surface, such as a mattress. Keep your knees bent at a 90-degree angle, with your feet flat on the floor."],
+          ["Put your fingertips on the back of your ears.","Your elbows should be bent and pointing out at your sides. Cupping the back of your ears with your fingertips — as opposed to placing them on the back of your head — can help prevent you from pulling yourself up by your neck as you’re doing sit ups."],
+          ["Lift your torso up as close to your thighs as possible.","Do this with a smooth, steady motion, keeping your feet flat on the floor. When you’re done lifting your torso, your lower back should be off the floor."],
+          ["Lower your torso down to the floor so you’re back in the starting position.","Like you did when you lifted your torso up to your thighs, use a smooth and steady motion as you lower it down."]
+        ]'),
+    ("ab", "Leg raises", "assets/images/legRaises.png", "assets/images/main/legRaisesMain.png" , 20, "Easy | 390 Calories Burn", 
+     '[
+          ["Complete lying leg raises if you don`t have a chin-up bar.","Lay on an exercise mat or a workout bench."],
+          ["Place your hands.","Beneath your lower buttocks to help support your pelvis. Keep your legs straight and your feet together."],
+          ["Tighten your core.","And lift your legs to a 60 to 70-degree angle. Hold this position for 3 to 5 seconds, and then lower your legs back down to complete 1 rep."]
+        ]'),
+    ("ab", "Bicycle cru nches", "assets/images/bicycleCruches.png", "assets/images/main/bicycleCrunchesMain.png" , 20, "Easy | 390 Calories Burn", 
+     '[
+          ["Lie flat on the floor and lace your hands behind your head.","Spread your elbows wide as you bring your hands behind your head. Lightly touch the back of your head with your fingers and palms."],
+          ["Bend your knees up at a 90-degree angle.","Keep your feet planted on the floor as you bring your knees up so they form the peak of a triangle. Your feet should be flat and about shoulder-width apart on the floor."],
+          ["Lift your legs up and away from your body.","Once your knees are bent, lift your feet up so your legs are extended and slightly bent at the knee. Avoid straightening your legs so much that your hamstrings feel tight."],
+          ["Bring your right knee to your chest and touch your left elbow to it.","Twist your torso as you draw in your knee. At the same time, rotate your left elbow to touch your right knee."],
+          ["Alternate the crunch by touching the other knee with the opposite elbow.","Release the crunch and bring your other knee in towards your chest as you touch the opposite elbow to it. Extend the leg that`s not tucked in so it`s pushed away from your body as though youre pedaling a bike."]
+        ]'),
+    ("ab", "Knee crunches", "assets/images/kneeCrunches.png", "assets/images/main/kneeCruchesMain.png" , 20, "Easy | 390 Calories Burn", 
+     '[
+          ["Lie with your back flat on the ground and your legs raised.","For the sake of comfort, lie on a carpeted section of floor or on a yoga mat. Bend your legs and draw up your knees until they’re directly over your pelvis. Bend your knees at a 90-degree angle so that your feet are sticking straight out."],
+          ["Hold your hands behind your head and look toward your stomach.","To get your torso into position for elbow-to-knee crunches, stretch your arms up behind you. Then, bend your elbows and hold both hands behind your head. Bend your neck so that you are looking down your body towards your belly button."],
+          ["Contract your abs and bring your knees up to your elbows.","Keep your chin down and tense your abdominal muscles. Keep your abs activated the whole time while you`re doing the exercise. To do a crunch, keep your elbows in place and lift your knees upward until your elbows and knees touch. You should feel a slight burn in your lower abs as you touch your elbows and knees together."],
+          ["Lower your body back to its starting position.","After you’ve completed 1 crunch, slowly relax your abdominal muscles and lower your head back down to the ground. Also lower your knees until they’re again directly above your pelvis."]
+        ]'),
+    ("ab", "Leg pull-ins", "assets/images/legPull.png", "assets/images/main/legPullMain.png" , 20, "Easy | 390 Calories Burn", 
+     '[
+          ["Lie on your back.","On a flat bench."],
+          ["Put your feet on the surface.","Of the bench, bend your knees and touch each other."],
+          ["Put your hands behind your head.","And grab the bench with your palms facing each other. The elbows bend at the same time."],
+          ["Pull in the abdomen.","To contract the abdominal muscles.\nStretch your legs into the air, slowly lifting your hips off the bench. At the same time, the press should remain tense. The lower parts of the legs should be facing the ceiling.\nPoint the toes towards the shins."]
+        ]'),
+    ("ab", "Plank arm lifts", "assets/images/plankArm.png", "assets/images/main/plankArmMain.png" , 20, "Easy | 390 Calories Burn", 
+     '[
+          ["Place your hands on the ground in front of you.","Your hands should be directly underneath you and just a little wider than your shoulders. Imagine you are about to do a pushup, since the starting position for a plank is the same. Like the name implies, the plank involves holding your body as straight as a plank."],
+          ["Put your legs out straight behind you.","Your toes should be firmly planted on the floor, with your legs extending straight back. Avoid pointing your buttocks to the ceiling or letting them fall to the floor. You want to have your legs pointing straight behind you and your entire torso straight as a plank. You dont want to push your weight back onto your heels, since this will reduce the workout for your abdominal muscles. Squeeze your abdominal muscles and glutes in order to benefit from the exercise and avoid injury."],
+          ["Make sure you are straight as a plank.","Check that your head is in line with your back, rather than falling to the floor. To ensure your head is in the right position, let your gaze fall to the floor about a foot down from your hands while maintaining a straight but relaxed neck. Continue holding the pose for as long as you are able. If you feel quite comfortable with your plank, you can go ahead and move on to the arm circles."],
+          ["Choose a weight.","You can do arm circles with or without a weight. If you are doing this exercise for the first time, it is best to just use your body weight. If you have been doing the exercise for a while and it is getting easy, you could hold a water bottle while doing the arm circles or use a small amount of weight."],
+          ["Move gradually from small circles to large circles.","To prevent mistakes in form that can lead to injury, the range of motion in the circling arm should be increased gradually. Start with small circles in a comfortable range of motion and work up to larger circles. Be sure to keep the hand on the floor directly under your shoulder, not in front of it."],
+          ["Do the arm circles with your left hand.","With your body weight on the right hand and your core muscles engaged, make a circle with your left hand. Imagine you are doing a windmill pitch in a baseball game, since it is a similar motion. Start by pointing your fingers towards the front of the room. Then, gradually move your arm towards the ceiling. Then, move your arm behind you towards the back of the room, and then back into the starting position. The motion should be continuous, so don’t stop at any point in the arm circle."]
+        ]'),
+     ("ab", "Elbow plank", "assets/images/elbowPlank.png", "assets/images/main/elbowPlankMain.png" , 20, "Easy | 390 Calories Burn", 
+     ' [
+          ["Balance on your forearms and your toes with your body off the ground.","Start by lying on your stomach with your forearms underneath you. Keep your elbows directly underneath your shoulders with your palms down. Engage your abs and your torso to rise up onto your toes, keeping your hips and stomach off the ground. Squeeze your legs and your glutes to keep your body in a straight line."]
+        ]'),
+     ("ab", "Body saw", "assets/images/bodySaw.png", "assets/images/main/bodySawMain.png" , 20, "Easy | 390 Calories Burn", 
+     '[
+          ["Lower yourself into a low plank position.","Bend your elbows 90 degrees and place your forearms on the ground. Line up your forearms beneath your shoulders, with your head facing forward. Then, lift yourself onto your toes, keeping your back as straight as possible. Tighten your abs, shoulders, quads, glutes, and arms, so you’re completely firm and stable as you start the exercise. While you’re in this starting position, keep your head lined up with your hands."],
+          ["Shift your entire body forward with your elbows and toes.","Bring the center of your body forward, shifting your weight from the balls of your feet to your tiptoes. Pull your nose past your hands to complete the first half of the rep. Tighten your abs as you shift yourself forward, and keep your back straight."],
+          ["Bring the center of your body forward, shifting your weight from the balls of your feet to your tiptoes. Pull your nose past your hands to complete the first half of the rep. Tighten your abs as you shift yourself forward, and keep your back straight.","Guide the center of your body backward, shifting back to the balls of your feet. Move backward until your forehead is behind your hands. You’ve now completed 1 rep of the body saw exercise!"]
+        ]');
+    ''');
+          },
+      );
+    } catch (e) {
+      print("Error opening database: $e");
+    }
   }
+
 
   Future<void> addWorkoutData(String type, String name, String imgPath, String main_img_path ,int repetitions, String calories, String description) async {
     // Ensure that the database is already opened

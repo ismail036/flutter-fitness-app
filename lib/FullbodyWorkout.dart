@@ -72,7 +72,6 @@ class _WorkoutBodyState extends State<WorkoutBody> {
     setState(() {
 
     });
-    db.updateImage();
   }
 
 
@@ -83,6 +82,7 @@ class _WorkoutBodyState extends State<WorkoutBody> {
   Widget build(BuildContext context) {// Initialize Hive
 
     getData();
+    print(data);
 
     return Container(
          child: Stack(
