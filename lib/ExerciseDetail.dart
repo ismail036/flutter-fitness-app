@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 import 'db_helper.dart';
+import 'main.dart';
 
 
 var excerciseName = "";
@@ -141,7 +142,7 @@ class _ExerciseBodyState extends State<ExerciseBody> {
 
             Align(
               alignment: Alignment.centerLeft,
-              child: Text("Custom Repetitions"),
+              child: Welcome.lang == "en" ? Text("Custom Repetitions") : Text("Пользовательские повторы"),
             ),
 
             Row(
@@ -164,7 +165,7 @@ class _ExerciseBodyState extends State<ExerciseBody> {
                     );
                   },
                 ),
-                Text("times")
+                Welcome.lang == "en" ? Text("times") : Text("раз"),
               ],
             ),
 
@@ -190,12 +191,13 @@ class _ExerciseBodyState extends State<ExerciseBody> {
                 onPressed: (){
                   updateData(_currentValue, exerciseData["id"]);
                 },
-                child: Text("Save",
+                child: Welcome.lang == "en" ? Text("Save",
                     style: TextStyle(color: Colors.white),
-                ),
+                ) :  Text("Сохранить",
+                style: TextStyle(color: Colors.white),
+    ),
               ),
-            ),
-
+            )
           ],
         ),
       ),

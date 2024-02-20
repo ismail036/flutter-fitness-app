@@ -53,6 +53,8 @@ class Welcome extends StatelessWidget {
   Welcome({super.key});
 
   static var water = 0;
+  static var lang = "en";
+  static var pp = "";
 
   static var data = [];
   static Future<void> getWaterData() async {
@@ -123,8 +125,18 @@ class Welcome extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        lang == "en"
+                            ? Text(
                           'Everybody Can Train',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            decoration: TextDecoration.none,
+                          ),
+                        )
+                            : Text(
+                          'Тренироваться может каждый',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -140,8 +152,14 @@ class Welcome extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // Your onTap action goes here
-                            print('SVG image tapped!');
+                            lang = "ru";
+                            pp = "ru";
+                            print(lang);
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => Welcome()), // New route (Home())
+                                  (route) => false, // Predicate: Always return false to remove all routes
+                            );
                           },
                           child: SvgPicture.asset(
                             'assets/images/Group.svg', // Replace 'assets/image.svg' with your SVG file path
@@ -152,8 +170,14 @@ class Welcome extends StatelessWidget {
                         SizedBox(width: 10,),
                         GestureDetector(
                           onTap: () {
-                            // Your onTap action goes here
-                            print('SVG image tapped!');
+                            lang = "en";
+                            pp = "";
+                            print(lang);
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => Welcome()), // New route (Home())
+                                  (route) => false, // Predicate: Always return false to remove all routes
+                            );
                           },
                           child: SvgPicture.asset(
                             'assets/images/Group-2.svg', // Replace 'assets/image.svg' with your SVG file path
@@ -175,22 +199,31 @@ class Welcome extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       getWaterData();
+                      await Future.delayed(Duration(microseconds: 2000));
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => Home()), // Yönlendirme burada yapılıyor
                       );
                     },
                     child: Center(
-                      child: Text(
+                      child: lang == "en" ? Text(
                         'Get Started',
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w700,
                           fontSize: 16,
                         ),
-                      ),
+                      ) : Text(
+                        'Начать',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                        ),
+                      )
+
                     ),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(Colors.white),

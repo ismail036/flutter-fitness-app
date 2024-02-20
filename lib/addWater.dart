@@ -15,8 +15,10 @@ class AddWater extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text(
+            title: Welcome.lang == "en" ? Text(
               "Add Water",
+            ) : Text(
+              "Добавить воду",
             ),
             centerTitle: true,
           ),
@@ -105,7 +107,7 @@ class _AddWaterBodyState extends State<AddWaterBody> {
                               color: Color(0xffb6b4c2),
                             ),
                             SizedBox(width: 10),
-                            Text("Water"),
+                            Welcome.lang == "en" ? Text("Water") : Text("Вода"),
                           ],
                         ),
                       ),
@@ -114,7 +116,7 @@ class _AddWaterBodyState extends State<AddWaterBody> {
                   ),
                 ),
                 SizedBox(height: 25),
-                Text("Water volume"),
+                Welcome.lang == "en" ? Text("Water volume") : Text("Объем воды"),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -129,7 +131,7 @@ class _AddWaterBodyState extends State<AddWaterBody> {
                           maxValue: 2000,
                           onChanged: (value) => setState(() => _currentValue = value),
                         ),
-                        Text('Water'), // Water metnini ekledik
+                        Welcome.lang == "en" ?  Text('Water') : Text('литров'), // Water metnini ekledik
                       ],
                     ),
                   ],
@@ -158,18 +160,24 @@ class _AddWaterBodyState extends State<AddWaterBody> {
                 onPressed: (){
                   setState(() {
                     value += _currentValue;
+                    Welcome.water = value;
+                    setData();
+                    upWter();
+                    Welcome.getWaterData();
+                    setTimeList();
                   });
                   print(value);
-                  Welcome.water = value;
-                  setData();
-                  Welcome.getWaterData();
-                  setTimeList();
-                  upWter();
+
                 },
-               child: Text(
+               child: Welcome.lang == "en" ?  Text(
                    "Add",
                  style: TextStyle(
                    color: Colors.white
+                 ),
+               ) : Text(
+                 "Добавить",
+                 style: TextStyle(
+                     color: Colors.white
                  ),
                ),
             ),

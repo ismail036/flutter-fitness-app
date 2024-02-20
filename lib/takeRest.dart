@@ -3,6 +3,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
 import 'Exercise.dart';
 import 'db_helper.dart';
+import 'main.dart';
 
 var data = [];
 
@@ -21,7 +22,7 @@ class TakeRest extends StatelessWidget {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Take a rest"),
+          title:   Welcome.lang == "en" ? Text("Take a rest") : Text("TОтдохните"),
           centerTitle: true,
         ),
         body: TakeRestBody(),
@@ -62,12 +63,19 @@ class _TakeRestBodyState extends State<TakeRestBody> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("TAKE A REST",
+                    Welcome.lang == "en" ? Text("TAKE A REST",
                       style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.w700,
                           color: Colors.indigo
-                      ),),
+                      ),
+                    ) : Text("ОТДОХНИТЕ",
+                      style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.indigo
+                      ),
+                    ),
                     Container(
                       child: CircularCountDownTimer(
                         duration: 10,
@@ -107,7 +115,7 @@ class _TakeRestBodyState extends State<TakeRestBody> {
                         },
                       ),
                     ),
-                    Text("Next Movement (${next+1}/${data.length})"),
+                    Welcome.lang == "en" ? Text("Next Movement (${next+1}/${data.length})") : Text("Следующая часть (${next+1}/${data.length})"),
                     SizedBox(height: 10,
                     ),
                     Text(data[next]["name"].toString(),
@@ -144,7 +152,13 @@ class _TakeRestBodyState extends State<TakeRestBody> {
                     MaterialPageRoute(builder: (context) => Exercise(type:workoutType,step:next,fE:data[next]['name'],time: startTime)), // Yönlendirme burada yapılıyor
                   );
                 },
-                child: Text("Skip rest",
+                child: Welcome.lang == "en" ? Text("Skip rest",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700
+                  ),
+                ) : Text("Пропустить отдых",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,

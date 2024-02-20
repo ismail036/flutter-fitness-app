@@ -4,6 +4,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
 import 'Exercise.dart';
 import 'db_helper.dart';
+import 'main.dart';
 var workoutType = "";
 
 class GetReady extends StatelessWidget {
@@ -16,7 +17,7 @@ class GetReady extends StatelessWidget {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Get Ready"),
+          title: Welcome.lang == "en" ? Text("Get Ready") : Text("Приготовьтесь"),
           centerTitle: true,
         ),
         body: ReadyBody(),
@@ -121,7 +122,13 @@ class _ReadyBodyState extends State<ReadyBody> {
                   MaterialPageRoute(builder: (context) => Exercise(type:workoutType,step:0,fE:firstExerciseName,time:DateTime.now())), // Yönlendirme burada yapılıyor
                 );
               },
-              child: Text("Start Workout",
+              child: Welcome.lang == "en" ? Text("Start Workout",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700
+                ),
+              ) : Text("Начать тренировку",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,

@@ -6,6 +6,7 @@ import 'package:pero_fitness/takeRest.dart';
 import 'FullbodyWorkout.dart';
 import 'db_helper.dart';
 import 'finish.dart';
+import 'main.dart';
 
 
 var workoutType = "";
@@ -130,8 +131,8 @@ class _ExerciseBodyState extends State<ExerciseBody> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("How To Do It"),
-                        Text((jsonList.length).toString() + " Steps ")
+                        Welcome.lang == "en" ? Text("How To Do It") : Text("Как это делать ?"),
+                        Welcome.lang == "en" ?  Text((jsonList.length).toString() + " Steps ") : Text((jsonList.length).toString() + " шага "),
                       ],
                     )
                   ],
@@ -200,7 +201,9 @@ class _ExerciseBodyState extends State<ExerciseBody> {
                   }
 
                 },
-                child: Text("Next",
+                child: Welcome.lang == "en" ? Text("Next",
+                  style: TextStyle(color: Colors.white),
+                ) : Text("Дальше",
                   style: TextStyle(color: Colors.white),
                 ),
               ),

@@ -4,6 +4,8 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:vertical_percent_indicator/vertical_percent_indicator.dart';
 
 import 'addWater.dart';
+import 'home.dart';
+import 'main.dart';
 
 class ActivityScreen extends StatelessWidget {
   const ActivityScreen({super.key});
@@ -14,8 +16,20 @@ class ActivityScreen extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => Home()), // New route (Home())
+                      (route) => false, // Predicate: Always return false to remove all routes
+                );
+              },
+            ),
+            title: Welcome.lang == "en" ? Text(
               "Activity Tracker",
+            ) : Text(
+              "Отслеживание активности",
             ),
             centerTitle: true,
           ),
@@ -65,7 +79,7 @@ class _ActivityBodyState extends State<ActivityBody> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Today Target"),
+                    Welcome.lang == "en" ? Text("Today Target")  : Text("Сегодняшняя цель") ,
                     TextButton(
                       onPressed: () {
                         // Add your onPressed logic here
@@ -107,7 +121,7 @@ class _ActivityBodyState extends State<ActivityBody> {
                               children: [
                                 Text("8L"),
                                 SizedBox(height: 10,),
-                                Text("Water Intake"),
+                                Welcome.lang == "en" ?  Text("Water Intake") : Text("Выпитой воды",style: TextStyle(fontSize: 12),),
                               ],
                             )
                           ],
@@ -134,7 +148,7 @@ class _ActivityBodyState extends State<ActivityBody> {
                             children: [
                               Text("2400"),
                               SizedBox(height: 10,),
-                              Text("Foot Steps   "),
+                              Welcome.lang == "en" ? Text("Foot Steps   ") : Text("Шагов          "),
                             ],
                           )
                         ],
@@ -146,9 +160,7 @@ class _ActivityBodyState extends State<ActivityBody> {
             ),
           ),
           SizedBox(height: 15,),
-          Text(
-              "Activity Progresss"
-          ),
+          Welcome.lang == "en" ? Text("Activity Progresss") : Text("Прогресс активности"),
           Material(
             elevation: 1,
             shape: RoundedRectangleBorder(
@@ -171,7 +183,7 @@ class _ActivityBodyState extends State<ActivityBody> {
                             Colors.teal,
                           ],
                         ),
-                        Text("Sun")
+                        Welcome.lang == "en" ? Text("Sun") : Text("Вс")
                       ],
                     ),
                     Column(
@@ -185,7 +197,7 @@ class _ActivityBodyState extends State<ActivityBody> {
                             Colors.teal,
                           ],
                         ),
-                        Text("Mon")
+                        Welcome.lang == "en" ? Text("Mon") : Text("Пн"),
                       ],
                     ),
                     Column(
@@ -199,7 +211,7 @@ class _ActivityBodyState extends State<ActivityBody> {
                             Colors.teal,
                           ],
                         ),
-                        Text("Tue")
+                        Welcome.lang == "en" ? Text("Tue") :  Text("Вт")
                       ],
                     ),
                     Column(
@@ -213,7 +225,7 @@ class _ActivityBodyState extends State<ActivityBody> {
                             Colors.teal,
                           ],
                         ),
-                        Text("Wed")
+                        Welcome.lang == "en" ? Text("Wed") : Text("Ср")
                       ],
                     ),
                     Column(
@@ -227,7 +239,7 @@ class _ActivityBodyState extends State<ActivityBody> {
                             Colors.teal,
                           ],
                         ),
-                        Text("Thu")
+                        Welcome.lang == "en" ? Text("Thu") : Text("Чт")
                       ],
                     ),
                     Column(
@@ -241,7 +253,7 @@ class _ActivityBodyState extends State<ActivityBody> {
                             Colors.teal,
                           ],
                         ),
-                        Text("Fri")
+                        Welcome.lang == "en" ? Text("Fri") : Text("Пт")
                       ],
                     ),
                     Column(
@@ -255,7 +267,7 @@ class _ActivityBodyState extends State<ActivityBody> {
                             Colors.teal,
                           ],
                         ),
-                        Text("Sat")
+                        Welcome.lang == "en" ? Text("Sat") : Text("Сб")
                       ],
                     ),
                   ],

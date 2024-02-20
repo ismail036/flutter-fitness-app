@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
 import 'db_helper.dart';
+import 'main.dart';
 
 var workoutType = "";
 var workoutText = "";
@@ -31,14 +32,26 @@ class FullbodyWorkout extends StatelessWidget {
       workoutText = "Fullbody Workout";
       imgPath = "assets/images/Vector.png";
       desc = "7 Exercises | 30mins | 320 Calories Burn";
-    }else if(workoutType == "ab"){
+    }else if(workoutType == "fullbodyru"){
+      workoutText = "Тренировка всего телаt";
+      imgPath = "assets/images/Vector.png";
+      desc = "7 упражнений | 30 минут | Сжигание 320 калорий";
+    }else if(workoutType == "abru"){
+      workoutText = "Тренировка ног";
+      imgPath = "assets/images/Ellipse 117.png";
+      desc = "9 упражнений | 40 минут | Сжигается 562 калории";
+    } else if(workoutType == "ab"){
       workoutText = "AB Workuot";
       imgPath = "assets/images/Ellipse 117.png";
-      desc = "5 Exercises | 20mins | 265 Calories Burn";
+      desc = "9 Exercises | 40mins | 562 Calories Burn";
+    }else if(workoutType == "lowebodyru"){
+      workoutText = "Тренировка пресса";
+      imgPath = "assets/images/Ellipse 116.png";
+      desc = "5 упражнений | 20 минут | Сжигание 265 калорий";
     }else{
       workoutText = "Lowebody Workuot";
       imgPath = "assets/images/Ellipse 116.png";
-      desc = "9 Exercises | 40mins | 562 Calories Burn";
+      desc = "5 Exercises | 20mins | 265 Calories Burn";
     }
 
     return  Container(
@@ -139,7 +152,7 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                      SizedBox(height: 30,),
                      Text(workoutText),
                      SizedBox(height: 10,),
-                     Text("7 Exercises | 30mins | 320 Calories Burn"),
+                     Text(desc),
                      SizedBox(height: 10,),
                      GestureDetector(
                        onTap: (){
@@ -176,7 +189,12 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                                    size: 25,
                                  ),
                                  SizedBox(width: 10,),
-                                 Text("Schedule Workout",
+
+                                 Welcome.lang == "en" ? Text("Schedule Workout",
+                                   style: TextStyle(
+                                       color: Colors.white,
+                                       fontSize: 13
+                                   )) : Text("Запланируйте тренировку",
                                    style: TextStyle(
                                        color: Colors.white,
                                        fontSize: 13
@@ -205,7 +223,7 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                        ),
                      ),
                      SizedBox(height: 20,),
-                     Text("Exercises"),
+                     Welcome.lang == "en" ? Text("Exercises") : Text("Упражнения"),
                      SizedBox(height: 15,),
                      for (int i = 0; i < data.length; i++)
                        if(data[i]["type"] == workoutType)
@@ -225,13 +243,15 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                                    children: [
                                      Image.asset(data[i]["img_path"]),
                                      SizedBox(width: 10,),
-                                     Column(
-                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                       crossAxisAlignment: CrossAxisAlignment.start,
-                                       children: [
-                                         Text(data[i]["name"]),
-                                         Text(data[i]["repetitions"].toString()+"x"),
-                                       ],
+                                     Flexible(
+                                       child: Column(
+                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                         crossAxisAlignment: CrossAxisAlignment.start,
+                                         children: [
+                                           Text(data[i]["name"]),
+                                           Text(data[i]["repetitions"].toString()+"x"),
+                                         ],
+                                       ),
                                      ),
                                    ],
                                  ),
@@ -268,7 +288,9 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                              MaterialPageRoute(builder: (context) => GetReady(type:workoutType)), // Yönlendirme burada yapılıyor
                            );
                          },
-                         child: Text("Start Workout",
+                         child: Welcome.lang == "en" ? Text("Start Workout",
+                           style: TextStyle(color: Colors.white),
+                         ) : Text("Начать тренировку",
                            style: TextStyle(color: Colors.white),
                          ),
                        ),

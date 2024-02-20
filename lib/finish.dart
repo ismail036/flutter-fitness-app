@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pero_fitness/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'main.dart';
+
 
 var finishTime;
 var difference;
@@ -19,7 +21,12 @@ class Finish extends StatelessWidget {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Finish",
+          title: Welcome.lang == "en" ? Text("Finish",
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+            ),
+          ) : Text("Финиш",
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 20,
@@ -93,15 +100,21 @@ class _FinishBodyState extends State<FinishBody> {
                     height:130,
                   ),
                   SizedBox(height: 70,),
-                  Text("Congratulations!",
+                  Welcome.lang == "en" ? Text("Congratulations!",
                     style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.w900,
                       color: Colors.indigo
                     ),
+                  ) : Text("Поздравляю!",
+                    style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.indigo
+                    ),
                   ),
                   SizedBox(height: 10,),
-                  Text("You have completed the workout!"),
+                  Welcome.lang == "en" ? Text("You have completed the workout!") : Text("Вы завершили тренировку!"),
                   SizedBox(height: 40,),
                   Container(
                     height: 0.8,
@@ -119,9 +132,13 @@ class _FinishBodyState extends State<FinishBody> {
                               fontWeight: FontWeight.w700
                             ),
                           ),
-                          Text("Workout",
+                          Welcome.lang == "en" ?  Text("Workout",
                             style: TextStyle(
                                 fontSize: 18
+                            ),
+                          ) : Text("Упражнений",
+                            style: TextStyle(
+                                fontSize: 12
                             ),
                           ),
                         ],
@@ -141,11 +158,15 @@ class _FinishBodyState extends State<FinishBody> {
                                 fontWeight: FontWeight.w700
                             ),
                           ),
-                          Text("cal",
+                          Welcome.lang == "en" ?  Text("cal",
                             style: TextStyle(
                                 fontSize: 18
                             ),
-                          ),
+                          ) : Text("Каллорий",
+                              style: TextStyle(
+                              fontSize: 12
+                              ),
+                              ),
                         ],
                       ),
                       SizedBox(width: 35,),
@@ -163,9 +184,13 @@ class _FinishBodyState extends State<FinishBody> {
                                 fontWeight: FontWeight.w700
                             ),
                           ),
-                          Text("Minutes",
+                          Welcome.lang == "en" ? Text("Minutes",
                             style: TextStyle(
                                 fontSize: 18
+                            ),
+                          ) : Text("Минут",
+                            style: TextStyle(
+                                fontSize: 12
                             ),
                           ),
                         ],
@@ -201,7 +226,13 @@ class _FinishBodyState extends State<FinishBody> {
                       (Route<dynamic> route) => false, // This will remove all routes below the pushed route
                 );
               },
-              child: Text("Home",
+              child: Welcome.lang == "en" ? Text("Home",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700
+                ),
+              ) : Text("Главная",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
