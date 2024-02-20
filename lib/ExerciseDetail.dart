@@ -75,6 +75,10 @@ class _ExerciseBodyState extends State<ExerciseBody> {
     var desc = exerciseData["description"].replaceAll(" , " , ",").replaceAll(' "', " '");
     desc = desc.replaceAll('" ', "' ");
     desc = desc.replaceAll('\n', "");
+    desc = desc.replaceAll("'L", "L");
+    desc = desc.replaceAll('L"', "L");
+    desc = desc.replaceAll("'V", "V");
+    desc = desc.replaceAll('V"', "V");
     List<dynamic> jsonList = json.decode(desc);
     _currentValue = exerciseData['repetitions'];
     return Container(

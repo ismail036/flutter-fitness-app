@@ -47,7 +47,7 @@ class _ScheduleBodyState extends State<ScheduleBody> {
   void initState() {
     super.initState();
     // Populate meetings
-    _meetings.add(Meeting(
+    /*  _meetings.add(Meeting(
       date: DateTime.now().add(Duration(hours: 1)), // Example date: 1 hour from now
       title: 'Meeting 2',
       description: 'Description for Meeting 2',
@@ -56,7 +56,7 @@ class _ScheduleBodyState extends State<ScheduleBody> {
       date: DateTime.now().add(Duration(hours: 2)), // Example date: 2 hours from now
       title: 'Meeting 3',
       description: 'Description for Meeting 3',
-    ));
+    ));*/
   }
 
   @override

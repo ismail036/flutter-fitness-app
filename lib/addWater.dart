@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:pero_fitness/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'db_helper.dart';
 
 
 class AddWater extends StatelessWidget {
@@ -57,6 +60,20 @@ class _AddWaterBodyState extends State<AddWaterBody> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setInt("water", value);
     }
+
+  Future<void> setTimeList() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+  }
+
+  Future<void> upWter() async {
+    var db = UserDatabaseProvider();
+    await db.open();
+    db.updateWater(_currentValue,(DateTime.now()).toString());
+  }
+
+
+
+
 
 
 
@@ -143,7 +160,11 @@ class _AddWaterBodyState extends State<AddWaterBody> {
                     value += _currentValue;
                   });
                   print(value);
+                  Welcome.water = value;
                   setData();
+                  Welcome.getWaterData();
+                  setTimeList();
+                  upWter();
                 },
                child: Text(
                    "Add",

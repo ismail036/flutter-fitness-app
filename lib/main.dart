@@ -15,6 +15,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:hive/hive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -49,11 +50,33 @@ class MyApp extends StatelessWidget {
 
 
 class Welcome extends StatelessWidget {
-  const Welcome({super.key});
+  Welcome({super.key});
+
+  static var water = 0;
+
+  static var data = [];
+  static Future<void> getWaterData() async {
+    var db = UserDatabaseProvider();
+    await db.open();
+    data = await db.getWaterList();
+    print(data);
+  }
 
   @override
   Widget build(BuildContext context) {
+
+
+    void getData() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      water = prefs.getInt('water') ?? 0;
+    }
+
+
+
+    getData();
+
     return Container(
+
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -153,6 +176,7 @@ class Welcome extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: TextButton(
                     onPressed: () {
+                      getWaterData();
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => Home()), // Yönlendirme burada yapılıyor

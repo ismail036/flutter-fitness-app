@@ -12,14 +12,35 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 import 'db_helper.dart';
 
 var workoutType = "";
+var workoutText = "";
+var imgPath = "";
+var desc = "";
 
 class FullbodyWorkout extends StatelessWidget {
   FullbodyWorkout({super.key, required String type}){
     workoutType = type;
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+
+
+    if(workoutType == "fullbody"){
+      workoutText = "Fullbody Workout";
+      imgPath = "assets/images/Vector.png";
+      desc = "7 Exercises | 30mins | 320 Calories Burn";
+    }else if(workoutType == "ab"){
+      workoutText = "AB Workuot";
+      imgPath = "assets/images/Ellipse 117.png";
+      desc = "5 Exercises | 20mins | 265 Calories Burn";
+    }else{
+      workoutText = "Lowebody Workuot";
+      imgPath = "assets/images/Ellipse 116.png";
+      desc = "9 Exercises | 40mins | 562 Calories Burn";
+    }
+
     return  Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -38,7 +59,7 @@ class FullbodyWorkout extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           title: Text(
-              "Fullbody Workout",
+            workoutText,
             style: TextStyle(color: Colors.white),
           ),
           centerTitle: true,
@@ -82,14 +103,13 @@ class _WorkoutBodyState extends State<WorkoutBody> {
   Widget build(BuildContext context) {// Initialize Hive
 
     getData();
-    print(data);
 
     return Container(
          child: Stack(
            children: [
              Container(
                padding: EdgeInsets.all(30),
-                 child: Image.asset("assets/images/Vector.png")
+                 child: Image.asset(imgPath)
              ),
              SingleChildScrollView(
                child: Container(
@@ -117,7 +137,7 @@ class _WorkoutBodyState extends State<WorkoutBody> {
                        ),
                      ),
                      SizedBox(height: 30,),
-                     Text("Fullbody Workout"),
+                     Text(workoutText),
                      SizedBox(height: 10,),
                      Text("7 Exercises | 30mins | 320 Calories Burn"),
                      SizedBox(height: 10,),

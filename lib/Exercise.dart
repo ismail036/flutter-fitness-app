@@ -5,6 +5,7 @@ import 'package:pero_fitness/takeRest.dart';
 
 import 'FullbodyWorkout.dart';
 import 'db_helper.dart';
+import 'finish.dart';
 
 
 var workoutType = "";
@@ -14,12 +15,14 @@ var data = [];
 var exerciseData;
 var _currentValue = 0;
 var exerciseName = "";
+var startTime;
 
 class Exercise extends StatelessWidget {
-  Exercise ({super.key, required String type, required int step, required String fE}){
+  Exercise ({super.key, required String type, required int step, required String fE, required DateTime time}){
     workoutType = type;
     exerciseStep = step;
     exerciseName = fE;
+    startTime = time;
   }
 
   @override
@@ -63,6 +66,10 @@ class _ExerciseBodyState extends State<ExerciseBody> {
     var desc = data[exerciseStep]["description"].replaceAll(" , " , ",").replaceAll(' "', " '");
     desc = desc.replaceAll('" ', "' ");
     desc = desc.replaceAll('\n', "");
+    desc = desc.replaceAll("'L", "L");
+    desc = desc.replaceAll('L"', "L");
+    desc = desc.replaceAll("'V", "V");
+    desc = desc.replaceAll('V"', "V");
     List<dynamic> jsonList = json.decode(desc);
     return Container(
       margin: EdgeInsets.all(15),
@@ -181,14 +188,14 @@ class _ExerciseBodyState extends State<ExerciseBody> {
               child: TextButton(
                 onPressed: (){
                   if(exerciseStep+1 >= data.length){
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => FullbodyWorkout(type: workoutType)), // Yönlendirme burada yapılıyor
+                      MaterialPageRoute(builder: (context) => Finish(time:startTime,wT:workoutType)), // Yönlendirme burada yapılıyor
                     );
                   }else{
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => TakeRest(nextStep:exerciseStep+1 , type:workoutType)), // Yönlendirme burada yapılıyor
+                      MaterialPageRoute(builder: (context) => TakeRest(nextStep:exerciseStep+1 , type:workoutType,time:startTime)), // Yönlendirme burada yapılıyor
                     );
                   }
 

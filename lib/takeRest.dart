@@ -8,10 +8,12 @@ var data = [];
 
 var next = 0;
 var exerciseType = "";
+var startTime;
 class TakeRest extends StatelessWidget {
-  TakeRest({super.key, required int nextStep, required String type}){
+  TakeRest({super.key, required int nextStep, required String type, required time}){
     next = nextStep;
     exerciseType = type;
+    startTime = time;
   }
 
   @override
@@ -93,7 +95,7 @@ class _TakeRestBodyState extends State<TakeRestBody> {
                         onComplete: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => Exercise(type:workoutType,step:next,fE:data[next]['name'])), // Yönlendirme burada yapılıyor
+                            MaterialPageRoute(builder: (context) => Exercise(type:workoutType,step:next,fE:data[next]['name'],time: startTime)), // Yönlendirme burada yapılıyor
                           );
                         },
                         onChange: (String timeStamp) {
@@ -105,7 +107,7 @@ class _TakeRestBodyState extends State<TakeRestBody> {
                         },
                       ),
                     ),
-                    Text("Next Movement (${next+1}/10)"),
+                    Text("Next Movement (${next+1}/${data.length})"),
                     SizedBox(height: 10,
                     ),
                     Text(data[next]["name"].toString(),
@@ -137,7 +139,10 @@ class _TakeRestBodyState extends State<TakeRestBody> {
               ),
               child: TextButton(
                 onPressed: (){
-
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => Exercise(type:workoutType,step:next,fE:data[next]['name'],time: startTime)), // Yönlendirme burada yapılıyor
+                  );
                 },
                 child: Text("Skip rest",
                   style: TextStyle(

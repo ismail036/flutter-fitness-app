@@ -82,7 +82,7 @@ class _ReadyBodyState extends State<ReadyBody> {
               onComplete: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => Exercise(type:workoutType,step:0,fE:firstExerciseName)), // Yönlendirme burada yapılıyor
+                  MaterialPageRoute(builder: (context) => Exercise(type:workoutType,step:0,fE:firstExerciseName,time:DateTime.now())), // Yönlendirme burada yapılıyor
                 );
               },
               onChange: (String timeStamp) {
@@ -118,7 +118,7 @@ class _ReadyBodyState extends State<ReadyBody> {
               onPressed: (){
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => Exercise(type:workoutType,step:0,fE:firstExerciseName)), // Yönlendirme burada yapılıyor
+                  MaterialPageRoute(builder: (context) => Exercise(type:workoutType,step:0,fE:firstExerciseName,time:DateTime.now())), // Yönlendirme burada yapılıyor
                 );
               },
               child: Text("Start Workout",
