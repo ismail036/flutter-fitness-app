@@ -2,6 +2,7 @@
 
 An app with workouts for different muscle groups, with the ability to add your own results and parameters.
 
+# Screenshot
 
 <img src="https://github.com/ismail036/flutter-fitness-app/assets/90846601/8163f17c-9a63-4535-bb9c-cd4ee4e26a87" width=25% height=25%>
 <img src="https://github.com/ismail036/flutter-fitness-app/assets/90846601/5aeb33dd-113e-46a0-806a-480255c83b0b" width=25% height=25%>
